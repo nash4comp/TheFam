@@ -1,3 +1,4 @@
+from bank import Bank
 from budget import Budget
 from transaction import Transaction
 
@@ -7,12 +8,13 @@ class User:
     This class manages users' information.
     """
 
-    def __init__(self, user_name, user_age, user_type):
+    def __init__(self, user_name, user_age, user_type, account_number, budget, balance):
         self._user_name = user_name
         self._user_age = user_age
         self._user_type = user_type
         self._transaction = Transaction()
-        self._budget = Budget()
+        self._budget = Budget(budget)
+        self._bank = Bank(account_number, balance)
 
     def get_user_name(self):
         return self._user_name
@@ -23,15 +25,12 @@ class User:
     def get_user_type(self):
         return self._user_type
 
-    # Should be parsed from Bank class
     def get_user_bank_account_number(self):
-        pass
+        return self._bank.get_account_number()
 
-    # Should be parsed from Bank class
     def get_user_bank_balance(self):
-        pass
+        return self.get_user_bank_balance()
 
-    # Should be parsed from Budget class
     def get_user_budget(self):
         pass
 
@@ -50,14 +49,11 @@ class User:
     def set_user_type(self, type):
         self._user_type = type
 
-    # Should be called the method from Bank class
     def set_user_bank_account_number(self, account_number):
-        pass
+        self._bank.set_account_number(account_number)
 
-    # Should be called the method from Bank class
-    def set_user_bank_balance(self):
-        self.
-        pass
+    def set_user_bank_balance(self, balance):
+        self._bank.set_balance(balance)
 
     # Should be called the method from Budget class
     def set_user_budget(self):
