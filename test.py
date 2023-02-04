@@ -13,10 +13,16 @@ class Test:
         :return: generated user list
         """
         user_list = [
-            User("Ken", 23, user.UserTypes.REBEL.value, 1234, 500, 300, 1000),
-            User("Ryu", 25, user.UserTypes.ANGEL.value, 5678, 800, 700, 2000)
+            User("Ken", 23, user.UserTypes.REBEL.value, "1234", 500, 300, 1000),
+            User("Ryu", 25, user.UserTypes.ANGEL.value, "5678", 800, 700, 2000)
         ]
         user_list[0].set_user_name("Ben")
+        user_list[0].set_user_age(22)
+        user_list[0].set_user_type(user.UserTypes.TROUBLE_MAKER.value)
+        user_list[0].set_user_bank_account_number("0987")
+        user_list[0].set_user_budget(300)
+        user_list[0].set_warning_budget_limit(100)
+        user_list[0].set_user_bank_balance(500)
 
         return user_list
 
