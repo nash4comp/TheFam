@@ -15,10 +15,6 @@ class User:
         self._budget = Budget()
 
     def get_user_name(self):
-        """
-        Returns user name
-        :return: user name
-        """
         return self._user_name
 
     def get_user_age(self):
@@ -27,12 +23,15 @@ class User:
     def get_user_type(self):
         return self._user_type
 
+    # Should be parsed from Bank class
     def get_user_bank_account_number(self):
-        return self.get_user_bank_account_number()
+        pass
 
+    # Should be parsed from Bank class
     def get_user_bank_balance(self):
-        return self.get_user_bank_balance()
+        pass
 
+    # Should be parsed from Budget class
     def get_user_budget(self):
         pass
 
@@ -51,12 +50,15 @@ class User:
     def set_user_type(self, type):
         self._user_type = type
 
+    # Should be called the method from Bank class
     def set_user_bank_account_number(self, account_number):
         pass
 
+    # Should be called the method from Bank class
     def set_user_bank_balance(self):
         self.
         pass
 
+    # Should be called the method from Budget class
     def set_user_budget(self):
         pass
