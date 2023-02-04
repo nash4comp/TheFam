@@ -9,12 +9,12 @@ Explanation
 
 UML diagram: https://app.diagrams.net/#G1DUxHF4SH4QveN8GbqGaHewuu07bC5lDG
 """
-
+import user
 from account import Account
-
 
 from test import Test
 from transaction import Transaction
+from user import User
 
 
 class FAM:
@@ -24,7 +24,7 @@ class FAM:
 
     def __init__(self):
         self._account = Account("")
-        # self._test = Test()
+        self._test = Test()
 
 
 def main():
@@ -32,6 +32,7 @@ def main():
 
     transaction = Transaction(19.32, "Burger king")
     user_list = test.load_test_user()
+
     my_account = Account(user_list)
     my_account.display_account_menu(transaction)
 

@@ -1,3 +1,6 @@
+from user import User
+
+
 class Account:
     """
     This class displays main menu.
@@ -6,6 +9,7 @@ class Account:
     def __init__(self, user_list):
         self._user_list = user_list
         # self._test = Test()
+        # self._user = User()
 
     def display_account_menu(self, transaction):
 
@@ -18,6 +22,7 @@ class Account:
             print("3. View Transactions by Budget")
             print("4. View Bank Account Details")
             print("5. Quit")
+
             string_input = input("Please enter your choice (1-5)")
 
             if string_input == '':
