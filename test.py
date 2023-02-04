@@ -27,4 +27,4 @@ class Test:
         temp = self.generate_user_lists()
         print("Hardcoded user list loaded.")
         for user in temp:
-            print(user.get_user_name(), user.get_budget())
+            print(user.get_user_name(), user.get_user_budget())
