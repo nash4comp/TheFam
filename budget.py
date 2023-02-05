@@ -3,7 +3,8 @@ class Budget:
     This class manages budget of user.
     """
 
-    def __init__(self, total_budget, budget_limit):
+    def __init__(self, budget_type_name, total_budget, budget_limit):
+        self._budget_type_name = budget_type_name
         self._total_budget = total_budget
         self._warning_budget_limit = budget_limit
 

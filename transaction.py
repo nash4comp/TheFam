@@ -7,7 +7,7 @@ class Transaction:
     """
     transactions = []
 
-    def __init__(self, dollar_amount, shop_name):
+    def __init__(self, dollar_amount, shop_name, budget_category):
         """
         initialize transaction with dollar amount you spent, and the store name
         :param dollar_amount: positive float
@@ -16,6 +16,7 @@ class Transaction:
         self._time_stamp = (datetime.datetime.now())
         self._dollar_amount = dollar_amount
         self._shop_name = shop_name
+        self._budge_category = budget_category
 
     def add_transaction(self):
         """
@@ -25,6 +26,7 @@ class Transaction:
         """
         user_input_store_name = input("Enter the place you went: ")
         self.set_shop_name(user_input_store_name)
+        # try-catch for user input values
         user_input_dollar_amount = float(input("Enter the amount you spent: "))
         self.set_dollar_amount(user_input_dollar_amount)
         print(f"\nYou spent {self.get_dollar_amount()} at {self.get_shop_name()}\n")
