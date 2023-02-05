@@ -7,9 +7,20 @@ class Budget:
         self._budget_type_name = budget_type_name
         self._total_budget = total_budget
         self._warning_budget_limit = budget_limit
+        self._is_budget_limit_met = False
+        self._is_out_of_balance = False
 
     def get_total_budget(self):
         return self._total_budget
+
+    def check_budget_limit(self):
+        pass
+
+    def lock_out(self):
+        # condition for lock out varies based on user type
+        # if the condition is met then the user cannot record transaction
+        pass
+
 
     def get_warning_budget_limit(self):
         return self._warning_budget_limit
