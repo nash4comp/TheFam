@@ -33,8 +33,8 @@ class Account:
             if user_input == 1:
                 user_input = input("Press Enter to continue")
             elif user_input == 2:
-                transaction.add_transaction()
-                transaction.show_transaction_by_budget()
+                transaction.add_transaction()  # returns Transaction
+                # transaction.show_transaction_by_budget()
             elif user_input == 3:
                 user_input = input("Press Enter to continue")
             elif user_input == 4:
