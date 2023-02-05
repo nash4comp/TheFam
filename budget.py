@@ -1,3 +1,6 @@
+from enum import Enum
+
+
 class Budget:
     """
     This class manages budget of user.
@@ -7,6 +10,8 @@ class Budget:
         self._budget_type_name = budget_type_name
         self._total_budget = total_budget
         self._warning_budget_limit = budget_limit
+        self._spent_amount = 0
+        self._budget_record = []  # list of transaction
         self._is_budget_limit_met = False
         self._is_out_of_balance = False
 
@@ -21,7 +26,6 @@ class Budget:
         # if the condition is met then the user cannot record transaction
         pass
 
-
     def get_warning_budget_limit(self):
         return self._warning_budget_limit
 
@@ -30,3 +34,10 @@ class Budget:
 
     def set_warning_budget_limit(self, budget_limit):
         self._warning_budget_limit = budget_limit
+
+
+class BudgetTypeEnum(Enum):
+    GE = "Game and Entertainment"
+    CA = "Clothing and Accessories"
+    EO = "Eat out"
+    MIS = "Miscellaneous"
