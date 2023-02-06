@@ -1,4 +1,5 @@
 import datetime
+import time
 
 
 class Transaction:
@@ -7,7 +8,7 @@ class Transaction:
     """
     transactions = []
 
-    def __init__(self, dollar_amount, shop_name, budget_category):
+    def __init__(self, dollar_amount, shop_name, budget_type):
         """
         initialize transaction with dollar amount you spent, and the store name
         :param dollar_amount: positive float
@@ -16,7 +17,7 @@ class Transaction:
         self._time_stamp = (datetime.datetime.now())
         self._dollar_amount = dollar_amount
         self._shop_name = shop_name
-        self._budge_category = budget_category
+        self._budget_type = budget_type
 
     def add_transaction(self):
         """
@@ -43,7 +44,8 @@ class Transaction:
         """
         cls.transactions.append(transaction)
 
-    def show_transaction_by_budget(self):
+    @staticmethod
+    def show_transaction_by_budget():
         """
         Shows all the recorded transactions.
         For lab 4, it will print all the transaction stored in class attribute that is transaction list.
@@ -51,7 +53,21 @@ class Transaction:
         """
         print("\n--- Transaction Record ---")
         for transaction in Transaction.transactions:
-            print(f"You spent {transaction.get_dollar_amount()} at {transaction.get_shop_name()}")
+            print(transaction)
+
+    def get_time(self):
+        """
+        Getter for dollar amount.
+        :return: self._dollar_amount
+        """
+        return self._time_stamp
+
+    def get_budget_type(self):
+        """
+        Getter for dollar amount.
+        :return: self._dollar_amount
+        """
+        return self._budget_type
 
     def get_dollar_amount(self):
         """
@@ -80,3 +96,17 @@ class Transaction:
         :param user_input_shop_name
         """
         self._shop_name = user_input_shop_name
+
+    def __str__(self):
+        to_str = f"Date is {self.get_time()} and amount spent is  {self.get_dollar_amount()}, " \
+                 f"Store name is {self.get_shop_name()}, budget type is {self.get_budget_type()}"
+        return to_str
+
+
+# test = Transaction(120, "Tim Hortons", "Eat out")
+# Transaction.add_transactions_to_list(test)
+# Transaction.show_transaction_by_budget()
+# time.sleep(60)
+# test = Transaction(300, "Mcdonalds", "Eat out")
+# Transaction.add_transactions_to_list(test)
+# Transaction.show_transaction_by_budget()

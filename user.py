@@ -34,6 +34,7 @@ class User:
         #                 Budget("Clothing and Accessories", budget, budget_limit),
         #                 Budget("Eating out", budget, budget_limit),
         #                 Budget("Miscellaneous", budget, budget_limit)}
+        self._transaction = []
         self._bank = Bank(account_number, balance)
 
     def get_user_name(self):
