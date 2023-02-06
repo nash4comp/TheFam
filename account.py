@@ -23,7 +23,9 @@ class Account:
             print("4. View Bank Account Details")
             print("---<User management>---")
             print("6. Register User")
-            print("7. List User")
+            print("7. List up Users")
+            print("8. Edit User")
+            print("9. Remove User")
             print("0. Quit")
             string_input = input("Please enter your choice (0-9)")
 

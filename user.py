@@ -10,7 +10,7 @@ class UserTypes(Enum):
     TROUBLE_MAKER = "Trouble Maker"
     REBEL = "Rebel"
 
-
+# TODO Think about putting unique ID variable into each account.
 class User:
     """
     This class manages users' information.
