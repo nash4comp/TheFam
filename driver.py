@@ -31,14 +31,18 @@ class FAM:
 def main():
     test = Test()
 
+    users = User()
+    transaction = Transaction(19.32, "Burger king", "GE")
+    my_account = Account(users)
+    my_account.display_account_menu(transaction, users)
     # transaction = Transaction(19.32, "Burger king")
 
-    test_user = User("Ryu", 25, user.UserTypes.ANGEL.value, "5678", [[200, 200], [200, 200], [200, 200], [200, 200]], 700)
-
-    my_account = Account(test_user)
-    test_bank = Bank("A0000", 200)
-    test_transaction = Transaction(100, "test", "Eat out")
-    my_account.display_account_menu(test_transaction, test_bank)  # test user Ken
+    # test_user = User("Ryu", 25, user.UserTypes.ANGEL.value, "5678", [[200, 200], [200, 200], [200, 200], [200, 200]], 700)
+    #
+    # my_account = Account(test_user)
+    # test_bank = Bank("A0000", 200)
+    # test_transaction = Transaction(100, "test", "Eat out")
+    # my_account.display_account_menu(test_transaction, test_bank)  # test user Ken
 
 
 if __name__ == '__main__':
