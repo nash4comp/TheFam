@@ -102,10 +102,10 @@ class Transaction:
         return to_str
 
 
-test = Transaction(120, "Tim Hortons", "Eat out")
-Transaction.add_transactions_to_list(test)
-Transaction.show_transaction_by_budget()
-time.sleep(60)
-test = Transaction(300, "Mcdonalds", "Eat out")
-Transaction.add_transactions_to_list(test)
-Transaction.show_transaction_by_budget()
+# test = Transaction(120, "Tim Hortons", "Eat out")
+# Transaction.add_transactions_to_list(test)
+# Transaction.show_transaction_by_budget()
+# time.sleep(60)
+# test = Transaction(300, "Mcdonalds", "Eat out")
+# Transaction.add_transactions_to_list(test)
+# Transaction.show_transaction_by_budget()
