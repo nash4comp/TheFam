@@ -23,18 +23,13 @@ class User:
         self._user_name = user_name
         self._user_age = user_age
         self._user_type = user_type
-        self._transaction = Transaction(200, "Temp")
+        self._transaction = []
         self._budget = {"GE": Budget("Game and Entertainment", budget[0][0], budget[0][1]),
                         "CA": Budget("Clothing and Accessories", budget[1][0], budget[1][1]),
                         "EO": Budget("Eating Out", budget[2][0], budget[2][1]),
                         "MIS": Budget("Miscellaneous", budget[3][0], budget[3][1])
                         }
 
-        # self._budget = {Budget("Game and Entertainment", budget, budget_limit),
-        #                 Budget("Clothing and Accessories", budget, budget_limit),
-        #                 Budget("Eating out", budget, budget_limit),
-        #                 Budget("Miscellaneous", budget, budget_limit)}
-        self._transaction = []
         self._bank = Bank(account_number, balance)
 
     def get_user_name(self):
