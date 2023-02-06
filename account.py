@@ -8,22 +8,24 @@ class Account:
 
     def __init__(self, user_list):
         self._user_list = user_list
+        self._user = User
         # self._test = Test()
-        # self._user = User()
 
-    def display_account_menu(self, transaction):
+    def display_account_menu(self, transaction, users):
 
         user_input = None
-        while user_input != 5:
+        while user_input != 0:
             print("\nWelcome to the FAM system!!!")
             print("-----------------------")
             print("1. View Budgets")
             print("2. Record a Transaction")
             print("3. View Transactions by Budget")
             print("4. View Bank Account Details")
-            print("5. Quit")
-
-            string_input = input("Please enter your choice (1-5)")
+            print("---<User management>---")
+            print("6. Register User")
+            print("7. List User")
+            print("0. Quit")
+            string_input = input("Please enter your choice (0-9)")
 
             if string_input == '':
                 continue
@@ -39,7 +41,11 @@ class Account:
                 user_input = input("Press Enter to continue")
             elif user_input == 4:
                 user_input = input("Press Enter to continue")
-            elif user_input == 5:
+            elif user_input == 6:
+                users.register_user()
+            elif user_input == 7:
+                users.list_user()
+            elif user_input == 0:
                 pass
             else:
                 print("Could not process the input. Please enter a"

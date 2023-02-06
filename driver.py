@@ -28,13 +28,14 @@ class FAM:
 
 
 def main():
-    test = Test()
+    # test = Test()
+    # user_list = test.load_test_user()
+    # my_account = Account(user_list)
 
-    transaction = Transaction(19.32, "Burger king")
-    user_list = test.load_test_user()
-
-    my_account = Account(user_list)
-    my_account.display_account_menu(transaction)
+    users = User()
+    transaction = Transaction(19.32, "Burger king", "GE")
+    my_account = Account(users)
+    my_account.display_account_menu(transaction, users)
 
 
 if __name__ == '__main__':

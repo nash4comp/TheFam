@@ -13,8 +13,8 @@ class Test:
         :return: generated user list
         """
         user_list = [
-            User("Ken", 23, user.UserTypes.REBEL.value, "1234", 500, 300, 1000),
-            User("Ryu", 25, user.UserTypes.ANGEL.value, "5678", 800, 700, 2000)
+            User(user_name="Ken", user_age=23, user_type=user.UserTypes.REBEL.value, account_number="1234", balance=500, budget=300, budget_limit=1000, bank_name="TD"),
+            User(user_name="Ryu", user_age=25, user_type=user.UserTypes.ANGEL.value, account_number="5678", balance=800, budget=700, budget_limit=2000, bank_name="CIBC"),
         ]
         user_list[0].set_user_name("Ben")
         user_list[0].set_user_age(22)
@@ -23,6 +23,7 @@ class Test:
         user_list[0].set_user_budget(300)
         user_list[0].set_warning_budget_limit(100)
         user_list[0].set_user_bank_balance(500)
+        user_list[0].set_bank_name("RBC")
 
         return user_list
 
@@ -41,5 +42,6 @@ class Test:
                   user_data.get_user_bank_account_number(),
                   user_data.get_user_budget(),
                   user_data.get_warning_budget_limit(),
-                  user_data.get_user_bank_balance()
+                  user_data.get_user_bank_balance(),
+                  user_data.get_bank_name()
                   )
