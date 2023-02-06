@@ -109,3 +109,31 @@ class User:
 
     def set_bank_name(self, bank_name):
         return self._bank.set_bank_name(bank_name)
+
+
+class Angel(User):
+    pass
+
+
+class TroubleMaker(User):
+    def __init__(self, user_name, user_age, user_type, account_number, budget, budget_limit, balance):
+        super().__init__(user_name, user_age, user_type, account_number, budget, budget_limit, balance)
+        self._is_locked_out = False
+
+    def get_user_locked_out_status(self):
+        return self._is_locked_out
+
+    def set_user_locked_out_status(self, locked_out_status):
+        self._is_locked_out = locked_out_status
+
+
+class Rebel(User):
+    def __init__(self, user_name, user_age, user_type, account_number, budget, budget_limit, balance):
+        super().__init__(user_name, user_age, user_type, account_number, budget, budget_limit, balance)
+        self._is_locked_out = False
+
+    def get_user_locked_out_status(self):
+        return self._is_locked_out
+
+    def set_user_locked_out_status(self, locked_out_status):
+        self._is_locked_out = locked_out_status
