@@ -9,7 +9,6 @@ class Account:
     def __init__(self, user_list):
         self._user_list = user_list
         # self._test = Test()
-        # self._user = User()
 
     def display_account_menu(self, transaction, bank):
 
@@ -35,8 +34,11 @@ class Account:
             elif user_input == 2:
                 new_transaction = transaction.add_transaction()
                 if bank.is_enough_balance(new_transaction):
-                    pass
-            elif user_input == 3:
+                    self._user_list.add_transaction_to_budget(new_transaction)  # test user Ken
+                else:
+                    print("Out of balance.")
+            elif user_input == 3:  # show transaction by budget
+                self._user_list.show_transaction_by_budget()
                 user_input = input("Press Enter to continue")
             elif user_input == 4:
                 user_input = input("Press Enter to continue")

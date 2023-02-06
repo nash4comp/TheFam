@@ -29,8 +29,22 @@ class Transaction:
         self.set_shop_name(user_input_store_name)
         user_input_dollar_amount = float(input("Enter the amount you spent: "))
         self.set_dollar_amount(user_input_dollar_amount)
-        print(f"\nYou spent {self.get_dollar_amount()} at {self.get_shop_name()}\n")
-        transaction_to_add = Transaction(self.get_dollar_amount(), self.get_shop_name())
+        print("Please select one budget type")
+        print("1. Game and Entertainment")
+        print("2. Clothing and Accessories")
+        print("3. Eating Out")
+        print("4. Miscellaneous")
+        user_budget_type = int(input("Enter the budget type number: "))
+        if user_budget_type == 1:
+            self.set_budget_type("Game and Entertainment")
+        elif user_budget_type == 2:
+            self.set_budget_type("Clothing and Accessories")
+        elif user_budget_type == 3:
+            self.set_budget_type("Eat out")
+        elif user_budget_type == 4:
+            self.set_budget_type("Miscellaneous")
+        transaction_to_add = Transaction(self.get_dollar_amount(), self.get_shop_name(), self.get_budget_type())
+        print(transaction_to_add)
         Transaction.add_transactions_to_list(transaction_to_add)
         return transaction_to_add
 
@@ -61,12 +75,6 @@ class Transaction:
         """
         return self._time_stamp
 
-    def get_budget_type(self):
-        """
-        Getter for dollar amount.
-        :return: self._dollar_amount
-        """
-        return self._budget_type
 
     def get_dollar_amount(self):
         """
@@ -89,12 +97,28 @@ class Transaction:
         """
         return self._shop_name
 
+    def get_budget_type(self):
+        """
+        Getter for dollar amount.
+        :return: self._dollar_amount
+        """
+        return self._budget_type
+
     def set_shop_name(self, user_input_shop_name):
         """
         Setter for shop_name
         :param user_input_shop_name
         """
         self._shop_name = user_input_shop_name
+
+
+
+    def set_budget_type(self, user_input_budget_type):
+        """
+        Setter for shop_name
+        :param user_input_shop_name
+        """
+        self._budget_type = user_input_budget_type
 
     def __str__(self):
         to_str = f"Date is {self.get_time()} and amount spent is  {self.get_dollar_amount()}, " \
