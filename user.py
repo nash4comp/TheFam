@@ -25,6 +25,10 @@ class User:
         self._budget = Budget(budget, budget_limit)
         self._bank = Bank(account_number, balance)
 
+
+    def add_transaction_to_budget(self, transaction):
+        budget_type_of_transaction = transaction.get
+
     def get_user_name(self):
         return self._user_name
 
