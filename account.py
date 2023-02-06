@@ -34,13 +34,15 @@ class Account:
             elif user_input == 2:
                 new_transaction = transaction.add_transaction()
                 if bank.is_enough_balance(new_transaction):
+                    bank.update_balance(new_transaction)
                     self._user_list.add_transaction_to_budget(new_transaction)  # test user Ken
                 else:
-                    print("Out of balance.")
+                    print("User type error message")
             elif user_input == 3:  # show transaction by budget
                 self._user_list.show_transaction_by_budget()
                 user_input = input("Press Enter to continue")
             elif user_input == 4:
+                print(bank)
                 user_input = input("Press Enter to continue")
             elif user_input == 5:
                 pass

@@ -35,19 +35,22 @@ class User:
         if budget_type_of_transaction == BudgetTypeEnum.GE.value:
             game_entertainment = self._budget.get("GE")  # GE budget
             game_entertainment.add_transaction(transaction)
-            print(game_entertainment.show_budget_record())
+            print(transaction)
         elif budget_type_of_transaction == BudgetTypeEnum.CA.value:
             clothing_accessories = self._budget.get("CA")
             clothing_accessories.add_transaction(transaction)
-            print(clothing_accessories.show_budget_record())
+            print(transaction)
+            # print(clothing_accessories.show_budget_record())
         elif budget_type_of_transaction == BudgetTypeEnum.EO.value:
             eo = self._budget.get("EO")  # GE budget
             eo.add_transaction(transaction)
-            print(eo.show_budget_record())
+            print(transaction)
+            # print(eo.show_budget_record())
         elif budget_type_of_transaction == BudgetTypeEnum.MIS.value:
             mis = self._budget.get("MIS")  # GE budget
             mis.add_transaction(transaction)
-            print(mis.show_budget_record())
+            print(transaction)
+            # print(mis.show_budget_record())
         else:
             print("Please check your budget type")
 

@@ -44,7 +44,6 @@ class Transaction:
         elif user_budget_type == 4:
             self.set_budget_type("Miscellaneous")
         transaction_to_add = Transaction(self.get_dollar_amount(), self.get_shop_name(), self.get_budget_type())
-        print(transaction_to_add)
         Transaction.add_transactions_to_list(transaction_to_add)
         return transaction_to_add
 
