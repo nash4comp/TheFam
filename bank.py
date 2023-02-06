@@ -1,9 +1,13 @@
+
 class Bank:
 
     def __init__(self, account_number, balance):
         self._account_number = account_number
         self._balance = balance
 
+    def is_enough_balance(self, transaction):
+        pass
+        # if self._balance >= transaction
     def get_account_number(self):
         return self._account_number
 

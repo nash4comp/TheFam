@@ -11,7 +11,7 @@ class Account:
         # self._test = Test()
         # self._user = User()
 
-    def display_account_menu(self, transaction):
+    def display_account_menu(self, transaction, bank):
 
         user_input = None
         while user_input != 5:
@@ -33,7 +33,8 @@ class Account:
             if user_input == 1:
                 user_input = input("Press Enter to continue")
             elif user_input == 2:
-                transaction.add_transaction()
+                new_transaction = transaction.add_transaction()
+                # bank.
                 transaction.show_transaction_by_budget()
             elif user_input == 3:
                 user_input = input("Press Enter to continue")
