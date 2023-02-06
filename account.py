@@ -36,7 +36,6 @@ class Account:
                 new_transaction = transaction.add_transaction()
                 if bank.is_enough_balance(new_transaction):
 
-                    # add the transaction to the corresponding budget
                 transaction.show_transaction_by_budget()
             elif user_input == 3:
                 user_input = input("Press Enter to continue")

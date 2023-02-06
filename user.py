@@ -21,7 +21,7 @@ class User:
         self._user_name = user_name
         self._user_age = user_age
         self._user_type = user_type
-        self._transaction = Transaction(200, "Temp")
+        self._transaction = []
         self._budget = Budget(budget, budget_limit)
         self._bank = Bank(account_number, balance)
 
