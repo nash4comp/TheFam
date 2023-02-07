@@ -24,8 +24,8 @@ class Account:
             print("---<User management>---")
             print("6. Register User")
             print("7. List up Users")
-            print("8. Edit User")
-            print("9. Remove User")
+            print("8. Remove User")
+            print("9. Quick Add User")
             print("0. Quit")
             string_input = input("Please enter your choice (0-9)")
 
@@ -53,6 +53,8 @@ class Account:
                 users.register_user()
             elif user_input == 7:
                 users.list_user()
+            elif user_input == 9:
+                users.quick_add_user()
             elif user_input == 0:
                 pass
             else:

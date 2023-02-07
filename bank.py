@@ -1,6 +1,6 @@
 class Bank:
 
-    def __init__(self, account_number, balance, bank_name):
+    def __init__(self, account_number="", balance="", bank_name=""):
         self._account_number = account_number
         self._balance = balance
         self._bank_name = bank_name

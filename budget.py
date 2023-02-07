@@ -6,7 +6,7 @@ class Budget:
     This class manages budget of user.
     """
 
-    def __init__(self, budget_type_name, total_budget, budget_limit):
+    def __init__(self, budget_type_name="", total_budget=0, budget_limit=0):
         self._budget_type_name = budget_type_name
         self._total_budget = total_budget
         self._warning_budget_limit = budget_limit
@@ -16,7 +16,7 @@ class Budget:
         self._is_out_of_balance = False
 
     def get_total_budget(self):
-        return self._total_budget
+        return self._budget_type_name + ": " + str(self._total_budget)
 
     def add_transaction(self, transaction):
         self._budget_record.append(transaction)
@@ -41,6 +41,9 @@ class Budget:
 
     def set_warning_budget_limit(self, budget_limit):
         self._warning_budget_limit = budget_limit
+
+    def __str__(self):
+        return "\n - " + self._budget_type_name + ": " + str(self._total_budget) + " / " + str(self._warning_budget_limit)
 
 
 class BudgetTypeEnum(Enum):

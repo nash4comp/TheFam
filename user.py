@@ -11,6 +11,7 @@ class UserTypes(Enum):
     TROUBLE_MAKER = "Trouble Maker"
     REBEL = "Rebel"
 
+
 # TODO Think about putting unique ID variable into each account.
 class User:
     """
@@ -18,23 +19,21 @@ class User:
     """
     user_type_list = UserTypes
 
-    # def __init__(self, user_name, user_age, user_type, account_number, budget, balance):
-
-    def __init__(self, user_name="", user_age=0, user_type="", account_number="", balance=0, bank_name="", budget=0,
-                 budget_limit=0):
+    def __init__(self, user_name="", user_age=0, user_type="", account_number="", balance=0, bank_name="",
+                 budget=None):
+        if budget is None:
+            budget = [[0, 0], [0, 0], [0, 0], [0, 0]]
         self._users = []
         self._user_name = user_name
         self._user_age = user_age
         self._user_type = user_type
         self._transaction = []
-        self._budget = Budget(budget, budget_limit)
         self._bank = Bank(account_number, balance, bank_name)
-        # self._budget = {"GE": Budget("Game and Entertainment", budget[0][0], budget[0][1]),
-        #                 "CA": Budget("Clothing and Accessories", budget[1][0], budget[1][1]),
-        #                 "EO": Budget("Eating Out", budget[2][0], budget[2][1]),
-        #                 "MIS": Budget("Miscellaneous", budget[3][0], budget[3][1])
-        #                 }
-        self._bank = Bank(account_number, balance)
+        self._budget = {"GE": Budget("Game and Entertainment", budget[0][0], budget[0][1]),
+                        "CA": Budget("Clothing and Accessories", budget[1][0], budget[1][1]),
+                        "EO": Budget("Eating Out", budget[2][0], budget[2][1]),
+                        "MIS": Budget("Miscellaneous", budget[3][0], budget[3][1])
+                        }
 
     def add_transaction_to_budget(self, transaction):
         budget_type_of_transaction = transaction.get_budget_type()
@@ -45,18 +44,18 @@ class User:
         elif budget_type_of_transaction == BudgetTypeEnum.CA.value:
             clothing_accessories = self._budget.get("CA")
             clothing_accessories.add_transaction(transaction)
-            print(transaction)
-            # print(clothing_accessories.show_budget_record())
+            # print(transaction)
+            print(clothing_accessories.show_budget_record())
         elif budget_type_of_transaction == BudgetTypeEnum.EO.value:
             eo = self._budget.get("EO")  # GE budget
             eo.add_transaction(transaction)
-            print(transaction)
-            # print(eo.show_budget_record())
+            # print(transaction)
+            print(eo.show_budget_record())
         elif budget_type_of_transaction == BudgetTypeEnum.MIS.value:
             mis = self._budget.get("MIS")  # GE budget
             mis.add_transaction(transaction)
-            print(transaction)
-            # print(mis.show_budget_record())
+            # print(transaction)
+            print(mis.show_budget_record())
         else:
             print("Please check your budget type")
 
@@ -85,11 +84,11 @@ class User:
     def get_user_bank_balance(self):
         return self._bank.get_balance()
 
-    # def get_user_budget(self):
-    #     return self._budget.get_total_budget()
+    def get_user_budget(self, budget_type):
+        return self._budget.get(budget_type)
 
-    # def get_warning_budget_limit(self):
-    #     return self._budget.get_warning_budget_limit()
+    # def get_warning_budget_limit(self, budget_type):
+    #     return self._budget.get_warning_budget_limit(budget_type)
 
     def get_bank_name(self):
         return self._bank.get_bank_name()
@@ -101,30 +100,67 @@ class User:
         new_user_account_number = input("Account number: ")
         new_user_bank_name = input("Bank name: ")
         new_user_bank_balance = input("Bank balance: ")
-        new_user_budget = input("Budget: ")
-        new_user_budget_limit = input("Budget limit: ")
-
+        new_user_budget_ge = input("Game and Entertainment Budget: ")
+        new_user_budget_limit_ge = input("Game and Entertainment Budget limit: ")
+        new_user_budget_ca = input("Clothing and Accessories Budget: ")
+        new_user_budget_limit_ca = input("Clothing and Accessories limit: ")
+        new_user_budget_eo = input("Eating Out Budget: ")
+        new_user_budget_limit_eo = input("Eating Out Budget limit: ")
+        new_user_budget_mis = input("Miscellaneous Budget: ")
+        new_user_budget_limit_mis = input("Miscellaneous limit: ")
         self._users.append(
             User(user_name=new_user_name,
-                 user_age=new_user_age,
+                 user_age=int(new_user_age),
                  user_type=new_user_type,
                  account_number=new_user_account_number,
-                 balance=new_user_bank_balance,
-                 budget=new_user_budget,
-                 budget_limit=new_user_budget_limit,
+                 balance=float(new_user_bank_balance),
+                 budget=[[float(new_user_budget_ge), float(new_user_budget_limit_ge)],
+                         [float(new_user_budget_ca), float(new_user_budget_limit_ca)],
+                         [float(new_user_budget_eo), float(new_user_budget_limit_eo)],
+                         [float(new_user_budget_mis), float(new_user_budget_limit_mis)]],
                  bank_name=new_user_bank_name))
 
+    def quick_add_user(self):
+        self._users.append(User(user_name="Jeff",
+                                user_age=37,
+                                user_type="Angel",
+                                account_number=1234567,
+                                balance=1000,
+                                budget=[[100, 90], [200, 190], [300, 290], [400, 390]],
+                                bank_name="TD"))
+        self._users.append(User(user_name="Nash",
+                                user_age=43,
+                                user_type="Rebel",
+                                account_number=9876543,
+                                balance=2000,
+                                budget=[[200, 190], [300, 290], [400, 390], [500, 490]],
+                                bank_name="RBC"))
+        self._users.append(User(user_name="Taylor",
+                                user_age=27,
+                                user_type="Trouble Maker",
+                                account_number=1357911,
+                                balance=5000,
+                                budget=[[500, 490], [600, 590], [700, 690], [800, 790]],
+                                bank_name="CIBC"))
+
     def list_user(self):
+        cnt = 1
         for user_data in self._users:
-            print(user_data.get_user_name(),
-                  user_data.get_user_age(),
-                  user_data.get_user_type(),
-                  user_data.get_user_bank_account_number(),
-                  user_data.get_user_budget(),
-                  user_data.get_warning_budget_limit(),
-                  user_data.get_user_bank_balance(),
-                  user_data.get_bank_name()
+            print("\n------< User No. " + str(cnt) + " >------")
+            print("Basic Information")
+            print(" - Name: " + user_data.get_user_name(),
+                  "\n - Age: " + str(user_data.get_user_age()),
+                  "\n - Type: " + user_data.get_user_type(),
+                  "\n - Bank Name: " + user_data.get_bank_name(),
+                  "\n - Account Number: " + str(user_data.get_user_bank_account_number()),
+                  "\n - Balance: " + str(user_data.get_user_bank_balance()),
+                  "\nBudget Categories (Budget / Limit)",
+                  user_data.get_user_budget("GE"),
+                  user_data.get_user_budget("CA"),
+                  user_data.get_user_budget("EO"),
+                  user_data.get_user_budget("MIS")
                   )
+            cnt += 1
 
     def remove_user(self):
         pass
@@ -146,7 +182,7 @@ class User:
 
     # def set_user_budget(self, budget):
     #     self._budget.set_total_budget(budget)
-
+    #
     # def set_warning_budget_limit(self, budget_limit):
     #     self._budget.set_warning_budget_limit(budget_limit)
 

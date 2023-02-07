@@ -11,7 +11,7 @@ UML diagram: https://app.diagrams.net/#G1DUxHF4SH4QveN8GbqGaHewuu07bC5lDG
 """
 import user
 from account import Account
-from bank import Bank
+from bank import Bank\
 
 from test import Test
 from transaction import Transaction
@@ -30,11 +30,11 @@ class FAM:
 
 def main():
     test = Test()
-
+    bank = Bank()
     users = User()
     transaction = Transaction(19.32, "Burger king", "GE")
     my_account = Account(users)
-    my_account.display_account_menu(transaction, users)
+    my_account.display_account_menu(transaction, users, bank)
     # transaction = Transaction(19.32, "Burger king")
 
     # test_user = User("Ryu", 25, user.UserTypes.ANGEL.value, "5678", [[200, 200], [200, 200], [200, 200], [200, 200]], 700)
