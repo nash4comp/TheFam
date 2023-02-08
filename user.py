@@ -19,7 +19,7 @@ class User:
     """
     user_type_list = UserTypes
 
-    def __init__(self, user_name="", user_age=0, user_type="", account_number="", balance=0, bank_name="",
+    def __init__(self, user_name="", user_age=0, user_type="", account_number="", balance=0.0, bank_name="",
                  budget=None):
         if budget is None:
             budget = [[0, 0], [0, 0], [0, 0], [0, 0]]
@@ -44,18 +44,18 @@ class User:
         elif budget_type_of_transaction == BudgetTypeEnum.CA.value:
             clothing_accessories = self._budget.get("CA")
             clothing_accessories.add_transaction(transaction)
-            # print(transaction)
-            print(clothing_accessories.show_budget_record())
+            print(transaction)
+            # print(clothing_accessories.show_budget_record())
         elif budget_type_of_transaction == BudgetTypeEnum.EO.value:
             eo = self._budget.get("EO")  # GE budget
             eo.add_transaction(transaction)
-            # print(transaction)
-            print(eo.show_budget_record())
+            print(transaction)
+            # print(eo.show_budget_record())
         elif budget_type_of_transaction == BudgetTypeEnum.MIS.value:
             mis = self._budget.get("MIS")  # GE budget
             mis.add_transaction(transaction)
-            # print(transaction)
-            print(mis.show_budget_record())
+            print(transaction)
+            # print(mis.show_budget_record())
         else:
             print("Please check your budget type")
 
@@ -94,6 +94,8 @@ class User:
         return self._bank.get_bank_name()
 
     def register_user(self):
+        # how to instantiate bank?
+        # where is new Bank?
         new_user_name = input("Name: ")
         new_user_age = input("Age: ")
         new_user_type = input("Type: ")

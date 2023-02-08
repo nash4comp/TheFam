@@ -14,7 +14,8 @@ class Transaction:
         :param dollar_amount: positive float
         :param shop_name: string
         """
-        self._time_stamp = (datetime.datetime.now())
+        self._raw_temp_time = (datetime.datetime.now())
+        self._time_stamp = self._raw_temp_time.strftime("%c")
         self._dollar_amount = dollar_amount
         self._shop_name = shop_name
         self._budget_type = budget_type

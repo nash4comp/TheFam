@@ -30,9 +30,10 @@ class FAM:
 
 def main():
     test = Test()
-    bank = Bank()
-    users = User()
-    transaction = Transaction(19.32, "Burger king", "GE")
+    bank = Bank("a1302", 120.85, "td")
+    users = User("Test", 13, "Angel", "a1302", "td", 120.85, [[100, 60], [200, 120],
+                                                              [400, 50], [120, 60]])
+    transaction = Transaction(0.0, "test", "GE")
     my_account = Account(users)
     my_account.display_account_menu(transaction, users, bank)
     # transaction = Transaction(19.32, "Burger king")
