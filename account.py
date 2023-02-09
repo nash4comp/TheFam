@@ -45,7 +45,6 @@ class Account:
             print("---<User management>---")
             print("6. Register User")
             print("7. List up Users")
-            print("8. Remove User")
             print("9. Switch User")
             print("0. Quit")
             string_input = input("Please enter your choice (0-9)")

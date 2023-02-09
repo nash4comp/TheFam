@@ -242,8 +242,6 @@ class User:
                 print(f"{cnt}. {user_data.get_user_name()}")
                 cnt += 1
 
-    def remove_user(self):
-        pass
 
     def set_user_name(self, name):
         self._user_name = name
