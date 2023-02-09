@@ -21,7 +21,13 @@ class Account:
             index += 1
         while (user_number < 1) or (user_number > user_cnt):
             user_number = input("Log in as: ")
-            user_number = int(user_number)
+            if user_number == '':
+                user_number = -1
+            try:
+                user_number = int(user_number)
+            except ValueError:
+                user_number = -1
+
         self._user_list.set_login_status(user_number, True)
 
     def display_account_menu(self, transaction, users, bank):

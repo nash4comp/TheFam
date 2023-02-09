@@ -121,6 +121,8 @@ class User:
             print("2. Trouble Maker")
             print("3. Rebel")
             new_user_type = input("Select the user's type: ")
+            if new_user_type == '':
+                new_user_type = -1
             new_user_type = int(new_user_type)
             if new_user_type == 1:
                 new_user_limit_factor = 0.9
