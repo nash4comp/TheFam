@@ -20,7 +20,7 @@ class User:
     user_type_list = UserTypes
 
     def __init__(self, user_name="", user_age=0, user_type="", account_number="", balance=0.0, bank_name="",
-                 budget=None):
+                 budget=None, login_status = False):
         if budget is None:
             budget = [[0, 0], [0, 0], [0, 0], [0, 0]]
         self._users = []
