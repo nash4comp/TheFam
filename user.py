@@ -94,51 +94,77 @@ class User:
         return self._bank.get_bank_name()
 
     def register_user(self):
+        """
+        TODO delete prompt limit and auto calculate it
+
+        """
         new_user_name = input("Name: ")
         new_user_age = input("Age: ")
-        new_user_type = input("Type: ")
+
+        new_user_type = 0
+        new_user_limit_factor = 0
+        while (new_user_type < 1) or (new_user_type > 3):
+            print("1. Angel")
+            print("2. Trouble Maker")
+            print("3. Rebel")
+            new_user_type = input("Select the user's type: ")
+            new_user_type = int(new_user_type)
+            if new_user_type == 1:
+                new_user_limit_factor = 0.9
+            elif new_user_type == 2:
+                new_user_limit_factor = 0.75
+            elif new_user_type == 3:
+                new_user_limit_factor = 0.5
+            else:
+                print("Please select the type from 1 - 3.")
+        type_list = list(UserTypes)
+        new_user_type = type_list[int(new_user_type) - 1].value
+
         new_user_account_number = input("Account number: ")
         new_user_bank_name = input("Bank name: ")
         new_user_bank_balance = input("Bank balance: ")
+
         new_user_budget_ge = input("Game and Entertainment Budget: ")
-        new_user_budget_limit_ge = input("Game and Entertainment Budget limit: ")
         new_user_budget_ca = input("Clothing and Accessories Budget: ")
-        new_user_budget_limit_ca = input("Clothing and Accessories limit: ")
         new_user_budget_eo = input("Eating Out Budget: ")
-        new_user_budget_limit_eo = input("Eating Out Budget limit: ")
         new_user_budget_mis = input("Miscellaneous Budget: ")
-        new_user_budget_limit_mis = input("Miscellaneous limit: ")
+
+        new_user_budget_limit_ge = new_user_limit_factor * float(new_user_budget_ge)
+        new_user_budget_limit_ca = new_user_limit_factor * float(new_user_budget_ca)
+        new_user_budget_limit_eo = new_user_limit_factor * float(new_user_budget_eo)
+        new_user_budget_limit_mis = new_user_limit_factor * float(new_user_budget_mis)
+
         self._users.append(
             User(user_name=new_user_name,
                  user_age=int(new_user_age),
                  user_type=new_user_type,
                  account_number=new_user_account_number,
                  balance=float(new_user_bank_balance),
-                 budget=[[float(new_user_budget_ge), float(new_user_budget_limit_ge)],
-                         [float(new_user_budget_ca), float(new_user_budget_limit_ca)],
-                         [float(new_user_budget_eo), float(new_user_budget_limit_eo)],
-                         [float(new_user_budget_mis), float(new_user_budget_limit_mis)]],
+                 budget=[[float(new_user_budget_ge), new_user_budget_limit_ge],
+                         [float(new_user_budget_ca), new_user_budget_limit_ca],
+                         [float(new_user_budget_eo), new_user_budget_limit_eo],
+                         [float(new_user_budget_mis), new_user_budget_limit_mis]],
                  bank_name=new_user_bank_name))
 
     def quick_add_user(self):
         self._users.append(User(user_name="Jeff",
                                 user_age=37,
                                 user_type="Angel",
-                                account_number=1234567,
+                                account_number="1234567",
                                 balance=1000,
                                 budget=[[100, 90], [200, 190], [300, 290], [400, 390]],
                                 bank_name="TD"))
         self._users.append(User(user_name="Nash",
                                 user_age=43,
                                 user_type="Rebel",
-                                account_number=9876543,
+                                account_number="9876543",
                                 balance=2000,
                                 budget=[[200, 190], [300, 290], [400, 390], [500, 490]],
                                 bank_name="RBC"))
         self._users.append(User(user_name="Taylor",
                                 user_age=27,
                                 user_type="Trouble Maker",
-                                account_number=1357911,
+                                account_number="1357911",
                                 balance=5000,
                                 budget=[[500, 490], [600, 590], [700, 690], [800, 790]],
                                 bank_name="CIBC"))
