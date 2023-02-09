@@ -52,7 +52,6 @@ class Account:
 
             if string_input == '':
                 continue
-
             user_input = int(string_input)
 
             if user_input == 1:

@@ -20,7 +20,7 @@ class User:
     user_type_list = UserTypes
 
     def __init__(self, user_name="", user_age=0, user_type="", account_number="", balance=0.0, bank_name="",
-                 budget=None, login_status = False):
+                 budget=None, login_status=False):
         if budget is None:
             budget = [[0, 0], [0, 0], [0, 0], [0, 0]]
         self._users = []
@@ -112,7 +112,15 @@ class User:
 
     def register_user(self):
         new_user_name = input("Name: ")
+        if new_user_name == '':
+            print("Please enter a valid name.")
+            return
         new_user_age = input("Age: ")
+        try:
+            new_user_age = int(new_user_age)
+        except ValueError:
+            print("Please enter a valid number for age.")
+            return
 
         new_user_type = 0
         new_user_limit_factor = 0
@@ -123,7 +131,11 @@ class User:
             new_user_type = input("Select the user's type: ")
             if new_user_type == '':
                 new_user_type = -1
-            new_user_type = int(new_user_type)
+            try:
+                new_user_type = int(new_user_type)
+            except ValueError:
+                print("Please enter a valid number.")
+                continue
             if new_user_type == 1:
                 new_user_limit_factor = 0.9
             elif new_user_type == 2:
@@ -132,33 +144,56 @@ class User:
                 new_user_limit_factor = 0.5
             else:
                 print("Please select the type from 1 - 3.")
+
         type_list = list(UserTypes)
         new_user_type = type_list[int(new_user_type) - 1].value
 
         new_user_account_number = input("Account number: ")
+        if new_user_account_number == '':
+            print("Please enter a valid account number.")
+            return
+
         new_user_bank_name = input("Bank name: ")
+        if new_user_bank_name == '':
+            print("Please enter a bank name.")
+            return
+
         new_user_bank_balance = input("Bank balance: ")
+        try:
+            new_user_bank_balance = float(new_user_bank_balance)
+        except ValueError:
+            print("Please enter a valid number for balance.")
+            return
 
         new_user_budget_ge = input("Game and Entertainment Budget: ")
         new_user_budget_ca = input("Clothing and Accessories Budget: ")
         new_user_budget_eo = input("Eating Out Budget: ")
         new_user_budget_mis = input("Miscellaneous Budget: ")
 
-        new_user_budget_limit_ge = new_user_limit_factor * float(new_user_budget_ge)
-        new_user_budget_limit_ca = new_user_limit_factor * float(new_user_budget_ca)
-        new_user_budget_limit_eo = new_user_limit_factor * float(new_user_budget_eo)
-        new_user_budget_limit_mis = new_user_limit_factor * float(new_user_budget_mis)
+        try:
+            new_user_budget_ge = float(new_user_budget_ge)
+            new_user_budget_ca = float(new_user_budget_ca)
+            new_user_budget_eo = float(new_user_budget_eo)
+            new_user_budget_mis = float(new_user_budget_mis)
+        except ValueError:
+            print("Please enter a valid number for budget.")
+            return
+
+        new_user_budget_limit_ge = new_user_limit_factor * new_user_budget_ge
+        new_user_budget_limit_ca = new_user_limit_factor * new_user_budget_ca
+        new_user_budget_limit_eo = new_user_limit_factor * new_user_budget_eo
+        new_user_budget_limit_mis = new_user_limit_factor * new_user_budget_mis
 
         self._users.append(
             User(user_name=new_user_name,
-                 user_age=int(new_user_age),
+                 user_age=new_user_age,
                  user_type=new_user_type,
                  account_number=new_user_account_number,
-                 balance=float(new_user_bank_balance),
-                 budget=[[float(new_user_budget_ge), new_user_budget_limit_ge],
-                         [float(new_user_budget_ca), new_user_budget_limit_ca],
-                         [float(new_user_budget_eo), new_user_budget_limit_eo],
-                         [float(new_user_budget_mis), new_user_budget_limit_mis]],
+                 balance=new_user_bank_balance,
+                 budget=[[new_user_budget_ge, new_user_budget_limit_ge],
+                         [new_user_budget_ca, new_user_budget_limit_ca],
+                         [new_user_budget_eo, new_user_budget_limit_eo],
+                         [new_user_budget_mis, new_user_budget_limit_mis]],
                  bank_name=new_user_bank_name))
 
     def quick_add_user(self):
@@ -243,6 +278,7 @@ class User:
 class Angel(User):
     def __init__(self):
         super().__init__()
+
     pass
 
 
