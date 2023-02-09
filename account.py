@@ -39,7 +39,8 @@ class Account:
             elif user_input == 2:
                 new_transaction = transaction.add_transaction()
                 if bank.is_enough_balance(new_transaction):
-                    bank.update_balance(new_transaction)
+                    bank.update_balance(new_transaction)  # before updating bank balance
+                    # I have to check budget limit
                     users.add_transaction_to_budget(new_transaction)  # test user Ken
                 else:
                     print("User type error message")
@@ -50,7 +51,7 @@ class Account:
                 print(bank)
                 user_input = input("Press Enter to continue")
             elif user_input == 6:
-                users.register_user()
+                users.register_user(budget)
             elif user_input == 7:
                 users.list_user()
             elif user_input == 9:

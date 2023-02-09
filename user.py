@@ -21,39 +21,43 @@ class User:
 
     def __init__(self, user_name="", user_age=0, user_type="", account_number="", balance=0.0, bank_name="",
                  budget=None):
-        if budget is None:
-            budget = [[0, 0], [0, 0], [0, 0], [0, 0]]
+        # if budget is None:
+        #     budget = [[0, 0], [0, 0], [0, 0], [0, 0]]
         self._users = []
         self._user_name = user_name
         self._user_age = user_age
         self._user_type = user_type
+        # self._budget_ratio = budget_ratio
         self._transaction = []
         self._bank = Bank(account_number, balance, bank_name)
-        self._budget = {"GE": Budget("Game and Entertainment", budget[0][0], budget[0][1]),
-                        "CA": Budget("Clothing and Accessories", budget[1][0], budget[1][1]),
-                        "EO": Budget("Eating Out", budget[2][0], budget[2][1]),
-                        "MIS": Budget("Miscellaneous", budget[3][0], budget[3][1])
+        self._budget = {"GE": Budget("Game and Entertainment", budget[0]),
+                        "CA": Budget("Clothing and Accessories", budget[1]),
+                        "EO": Budget("Eating Out", budget[2]),
+                        "MIS": Budget("Miscellaneous", budget[3])
                         }
+
+    def setup_budget_limit(self, budget):
+        budget.calculate_budget_limit_and_lockout_limit(self._user_type)
 
     def add_transaction_to_budget(self, transaction):
         budget_type_of_transaction = transaction.get_budget_type()
         if budget_type_of_transaction == BudgetTypeEnum.GE.value:
             game_entertainment = self._budget.get("GE")  # GE budget
-            game_entertainment.add_transaction(transaction)
+            game_entertainment.add_transaction(transaction, self.get_user_type())
             print(transaction)
         elif budget_type_of_transaction == BudgetTypeEnum.CA.value:
             clothing_accessories = self._budget.get("CA")
-            clothing_accessories.add_transaction(transaction)
+            clothing_accessories.add_transaction(transaction, self.get_user_type())
             print(transaction)
             # print(clothing_accessories.show_budget_record())
         elif budget_type_of_transaction == BudgetTypeEnum.EO.value:
             eo = self._budget.get("EO")  # GE budget
-            eo.add_transaction(transaction)
+            eo.add_transaction(transaction, self.get_user_type())
             print(transaction)
             # print(eo.show_budget_record())
         elif budget_type_of_transaction == BudgetTypeEnum.MIS.value:
             mis = self._budget.get("MIS")  # GE budget
-            mis.add_transaction(transaction)
+            mis.add_transaction(transaction, self.get_user_type())
             print(transaction)
             # print(mis.show_budget_record())
         else:
@@ -93,12 +97,13 @@ class User:
     def get_bank_name(self):
         return self._bank.get_bank_name()
 
-    def register_user(self):
+    def register_user(self, budget):
         # how to instantiate bank?
         # where is new Bank?
         new_user_name = input("Name: ")
         new_user_age = input("Age: ")
         new_user_type = input("Type: ")
+        budget.calculate_budget_limit_and_lockout_limit(new_user_type)# set budget limit based on user type
         new_user_account_number = input("Account number: ")
         new_user_bank_name = input("Bank name: ")
         new_user_bank_balance = input("Bank balance: ")
@@ -116,33 +121,36 @@ class User:
                  user_type=new_user_type,
                  account_number=new_user_account_number,
                  balance=float(new_user_bank_balance),
-                 budget=[[float(new_user_budget_ge), float(new_user_budget_limit_ge)],
-                         [float(new_user_budget_ca), float(new_user_budget_limit_ca)],
-                         [float(new_user_budget_eo), float(new_user_budget_limit_eo)],
-                         [float(new_user_budget_mis), float(new_user_budget_limit_mis)]],
+                 budget=[float(new_user_budget_ge),
+                         float(new_user_budget_ca),
+                         float(new_user_budget_eo),
+                         float(new_user_budget_mis)],
                  bank_name=new_user_bank_name))
 
     def quick_add_user(self):
         self._users.append(User(user_name="Jeff",
                                 user_age=37,
                                 user_type="Angel",
+                                # budget_ratio=0.9,
                                 account_number=1234567,
                                 balance=1000,
-                                budget=[[100, 90], [200, 190], [300, 290], [400, 390]],
+                                budget=[[100], [200], [300], [400]],
                                 bank_name="TD"))
         self._users.append(User(user_name="Nash",
                                 user_age=43,
                                 user_type="Rebel",
+                                # budget_ratio=0.75,
                                 account_number=9876543,
                                 balance=2000,
-                                budget=[[200, 190], [300, 290], [400, 390], [500, 490]],
+                                budget=[[200], [300], [400], [500]],
                                 bank_name="RBC"))
         self._users.append(User(user_name="Taylor",
                                 user_age=27,
                                 user_type="Trouble Maker",
+                                # budget_ratio=0.5,
                                 account_number=1357911,
                                 balance=5000,
-                                budget=[[500, 490], [600, 590], [700, 690], [800, 790]],
+                                budget=[[500], [600], [700], [800]],
                                 bank_name="CIBC"))
 
     def list_user(self):

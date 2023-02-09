@@ -11,9 +11,9 @@ UML diagram: https://app.diagrams.net/#G1DUxHF4SH4QveN8GbqGaHewuu07bC5lDG
 """
 import user
 from account import Account
-from bank import Bank\
+from bank import Bank
+from budget import Budget
 
-from test import Test
 from transaction import Transaction
 from user import User
 
@@ -25,15 +25,18 @@ class FAM:
 
     def __init__(self):
         self._account = Account("")
-        self._test = Test()
+        # self._test = Test()
 
 
 def main():
-    test = Test()
-    bank = Bank("a1302", 120.85, "td")
-    users = User("Test", 13, "Angel", "a1302", "td", 120.85, [[100, 60], [200, 120],
-                                                              [400, 50], [120, 60]])
+    # test = Test()
+    bank = Bank("a1302", 500, "td")
+    users = User("Test", 13, "Angel", "a1302", "td", 500, [[100], [200],
+                                                              [400], [120]])
     transaction = Transaction(0.0, "test", "GE")
+    test_budget = Budget("test", 100)
+    users.setup_budget_limit(test_budget)
+
     my_account = Account(users)
     my_account.display_account_menu(transaction, users, bank)
     # transaction = Transaction(19.32, "Burger king")
