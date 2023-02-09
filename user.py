@@ -20,7 +20,7 @@ class User:
     user_type_list = UserTypes
 
     def __init__(self, user_name="", user_age=0, user_type="", account_number="", balance=0, bank_name="",
-                 budget=None):
+                 budget=None, login_status=False):
         if budget is None:
             budget = [[0, 0], [0, 0], [0, 0], [0, 0]]
         self._users = []
@@ -34,6 +34,7 @@ class User:
                         "EO": Budget("Eating Out", budget[2][0], budget[2][1]),
                         "MIS": Budget("Miscellaneous", budget[3][0], budget[3][1])
                         }
+        self.login_status = login_status
 
     def add_transaction_to_budget(self, transaction):
         budget_type_of_transaction = transaction.get_budget_type()
@@ -93,11 +94,23 @@ class User:
     def get_bank_name(self):
         return self._bank.get_bank_name()
 
-    def register_user(self):
-        """
-        TODO delete prompt limit and auto calculate it
+    def get_login_status(self):
+        return self.login_status
 
-        """
+    def get_user_count(self):
+        return self._users.__len__()
+
+    def get_current_user_index(self):
+        index = 0
+        for i in self._users:
+            if self._users[index].login_status:
+                return index
+            index += 1
+
+    def get_current_user_name(self, index):
+        return self._users[index].get_user_name()
+
+    def register_user(self):
         new_user_name = input("Name: ")
         new_user_age = input("Age: ")
 
@@ -152,41 +165,45 @@ class User:
                                 user_type="Angel",
                                 account_number="1234567",
                                 balance=1000,
-                                budget=[[100, 90], [200, 190], [300, 290], [400, 390]],
+                                budget=[[100, 90], [200, 180], [300, 270], [400, 360]],
                                 bank_name="TD"))
         self._users.append(User(user_name="Nash",
                                 user_age=43,
                                 user_type="Rebel",
                                 account_number="9876543",
                                 balance=2000,
-                                budget=[[200, 190], [300, 290], [400, 390], [500, 490]],
+                                budget=[[200, 150], [300, 225], [400, 300], [500, 375]],
                                 bank_name="RBC"))
         self._users.append(User(user_name="Taylor",
                                 user_age=27,
                                 user_type="Trouble Maker",
                                 account_number="1357911",
                                 balance=5000,
-                                budget=[[500, 490], [600, 590], [700, 690], [800, 790]],
+                                budget=[[500, 250], [600, 300], [700, 350], [800, 400]],
                                 bank_name="CIBC"))
 
-    def list_user(self):
+    def list_user(self, option):
         cnt = 1
         for user_data in self._users:
-            print("\n------< User No. " + str(cnt) + " >------")
-            print("Basic Information")
-            print(" - Name: " + user_data.get_user_name(),
-                  "\n - Age: " + str(user_data.get_user_age()),
-                  "\n - Type: " + user_data.get_user_type(),
-                  "\n - Bank Name: " + user_data.get_bank_name(),
-                  "\n - Account Number: " + str(user_data.get_user_bank_account_number()),
-                  "\n - Balance: " + str(user_data.get_user_bank_balance()),
-                  "\nBudget Categories (Budget / Limit)",
-                  user_data.get_user_budget("GE"),
-                  user_data.get_user_budget("CA"),
-                  user_data.get_user_budget("EO"),
-                  user_data.get_user_budget("MIS")
-                  )
-            cnt += 1
+            if option == 0:
+                print("\n------< User No. " + str(cnt) + " >------")
+                print("Basic Information")
+                print(" - Name: " + user_data.get_user_name(),
+                      "\n - Age: " + str(user_data.get_user_age()),
+                      "\n - Type: " + user_data.get_user_type(),
+                      "\n - Bank Name: " + user_data.get_bank_name(),
+                      "\n - Account Number: " + str(user_data.get_user_bank_account_number()),
+                      "\n - Balance: " + str(user_data.get_user_bank_balance()),
+                      "\nBudget Categories (Budget / Limit)",
+                      user_data.get_user_budget("GE"),
+                      user_data.get_user_budget("CA"),
+                      user_data.get_user_budget("EO"),
+                      user_data.get_user_budget("MIS")
+                      )
+                cnt += 1
+            elif option == 1:
+                print(f"{cnt}. {user_data.get_user_name()}")
+                cnt += 1
 
     def remove_user(self):
         pass
@@ -215,14 +232,21 @@ class User:
     def set_bank_name(self, bank_name):
         return self._bank.set_bank_name(bank_name)
 
+    def set_login_status(self, index, login_status):
+        self._users[index - 1].login_status = login_status
+        # print(self._users[index - 1].get_user_name())
+        # print(self._users[index - 1].get_login_status())
+
 
 class Angel(User):
+    def __init__(self):
+        super().__init__()
     pass
 
 
 class TroubleMaker(User):
-    def __init__(self, user_name, user_age, user_type, account_number, budget, budget_limit, balance):
-        super().__init__(user_name, user_age, user_type, account_number, budget, budget_limit, balance)
+    def __init__(self):
+        super().__init__()
         self._is_locked_out = False
 
     def get_user_locked_out_status(self):
@@ -233,8 +257,8 @@ class TroubleMaker(User):
 
 
 class Rebel(User):
-    def __init__(self, user_name, user_age, user_type, account_number, budget, budget_limit, balance):
-        super().__init__(user_name, user_age, user_type, account_number, budget, budget_limit, balance)
+    def __init__(self):
+        super().__init__()
         self._is_locked_out = False
 
     def get_user_locked_out_status(self):
