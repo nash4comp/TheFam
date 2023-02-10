@@ -1,6 +1,5 @@
 import datetime
-import time
-
+from budget import BudgetTypeEnum
 
 class Transaction:
     """
@@ -75,7 +74,6 @@ class Transaction:
         """
         return self._time_stamp
 
-
     def get_dollar_amount(self):
         """
         Getter for dollar amount.
@@ -104,14 +102,28 @@ class Transaction:
         """
         return self._budget_type
 
+    def get_budget_type_for_key(self):
+        """
+        Convert budget type string value to Enum class name
+        """
+        type_to_change = self.get_budget_type()
+        key = None
+        if type_to_change == BudgetTypeEnum.GE.value:
+            key = BudgetTypeEnum.GE.name
+        elif type_to_change == BudgetTypeEnum.GE.value:
+            key = BudgetTypeEnum.CA.name
+        elif type_to_change == BudgetTypeEnum.EO.value:
+            key = BudgetTypeEnum.EO.name
+        elif type_to_change == BudgetTypeEnum.MIS.value:
+            key = BudgetTypeEnum.MIS.name
+        return key
+
     def set_shop_name(self, user_input_shop_name):
         """
         Setter for shop_name
         :param user_input_shop_name
         """
         self._shop_name = user_input_shop_name
-
-
 
     def set_budget_type(self, user_input_budget_type):
         """
@@ -121,15 +133,7 @@ class Transaction:
         self._budget_type = user_input_budget_type
 
     def __str__(self):
-        to_str = f"Date is {self.get_time()} and amount spent is  {self.get_dollar_amount()}, " \
-                 f"Store name is {self.get_shop_name()}, budget type is {self.get_budget_type()}"
+        to_str = f"Budget type is {self.get_budget_type()}, Date is {self.get_time()}, " \
+                 f"Amount spent is ${self.get_dollar_amount()}, " \
+                 f"Store name is {self.get_shop_name()}"
         return to_str
-
-
-# test = Transaction(120, "Tim Hortons", "Eat out")
-# Transaction.add_transactions_to_list(test)
-# Transaction.show_transaction_by_budget()
-# time.sleep(60)
-# test = Transaction(300, "Mcdonalds", "Eat out")
-# Transaction.add_transactions_to_list(test)
-# Transaction.show_transaction_by_budget()

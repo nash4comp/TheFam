@@ -29,24 +29,20 @@ class FAM:
 
 
 def main():
-    # test = Test()
-    bank = Bank("a1302", 500, "td")
-    users = User("Test", 13, "Angel", "a1302", "td", 500, [[100], [200],
-                                                              [400], [120]])
-    transaction = Transaction(0.0, "test", "GE")
-    test_budget = Budget("test", 100)
-    users.setup_budget_limit(test_budget)
+    u1 = User(user_name="Tim",
+              user_age=12,
+              user_type="Angel",
+              account_number="1234567",
+              balance=1000,
+              budget=[[100, 90], [200, 180], [300, 270], [400, 360]],
+              bank_name="TD")
+
+    users = u1
+    transaction_driver = Transaction(0.0, "test", "GE")
 
     my_account = Account(users)
-    my_account.display_account_menu(transaction, users, bank)
-    # transaction = Transaction(19.32, "Burger king")
+    my_account.display_account_menu(transaction_driver, users)
 
-    # test_user = User("Ryu", 25, user.UserTypes.ANGEL.value, "5678", [[200, 200], [200, 200], [200, 200], [200, 200]], 700)
-    #
-    # my_account = Account(test_user)
-    # test_bank = Bank("A0000", 200)
-    # test_transaction = Transaction(100, "test", "Eat out")
-    # my_account.display_account_menu(test_transaction, test_bank)  # test user Ken
 
 
 if __name__ == '__main__':
