@@ -1,6 +1,7 @@
 import datetime
 from budget import BudgetTypeEnum
 
+
 class Transaction:
     """
     Transaction class creates transactions,
@@ -56,17 +57,6 @@ class Transaction:
         """
         cls.transactions.append(transaction)
 
-    @staticmethod
-    def show_transaction_by_budget():
-        """
-        Shows all the recorded transactions.
-        For lab 4, it will print all the transaction stored in class attribute that is transaction list.
-        The proper function will be updated later.
-        """
-        print("\n--- Transaction Record ---")
-        for transaction in Transaction.transactions:
-            print(transaction)
-
     def get_time(self):
         """
         Getter for dollar amount.
@@ -105,12 +95,13 @@ class Transaction:
     def get_budget_type_for_key(self):
         """
         Convert budget type string value to Enum class name
+        Return String
         """
         type_to_change = self.get_budget_type()
         key = None
         if type_to_change == BudgetTypeEnum.GE.value:
             key = BudgetTypeEnum.GE.name
-        elif type_to_change == BudgetTypeEnum.GE.value:
+        elif type_to_change == BudgetTypeEnum.CA.value:
             key = BudgetTypeEnum.CA.name
         elif type_to_change == BudgetTypeEnum.EO.value:
             key = BudgetTypeEnum.EO.name

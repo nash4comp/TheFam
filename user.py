@@ -3,7 +3,6 @@ from enum import Enum
 from bank import Bank
 from budget import Budget
 from budget import BudgetTypeEnum
-from transaction import Transaction
 
 
 class UserTypes(Enum):
@@ -34,10 +33,9 @@ class User:
                         "EO": Budget("Eating Out", budget[2][0], budget[2][1]),
                         "MIS": Budget("Miscellaneous", budget[3][0], budget[3][1])
                         }
+        self._locked_budget_list = []
         self.login_status = login_status
-
-    def setup(self, budget):
-        budget.setup()
+        # self._is_locked_user = False
 
     def add_transaction_to_budget(self, transaction):
         budget_type_of_transaction = transaction.get_budget_type()
@@ -73,6 +71,21 @@ class User:
         print("Miscellaneous: ")
         self._budget.get("MIS").show_budget_record()
 
+    def add_to_locked_budget_list(self, budget):
+        if budget not in self._locked_budget_list:
+            self._locked_budget_list.append(budget)
+
+    def get_locked_budget_count(self):
+        return len(self._locked_budget_list)
+
+    def is_locked_user(self):
+        if self.get_locked_budget_count() >= 2:
+            self.lock_user()
+
+    def lock_user(self):
+        self._is_locked_user = True
+
+
     def get_user_name(self):
         return self._user_name
 
@@ -90,6 +103,9 @@ class User:
 
     def get_user_budget(self, budget_type):
         return self._budget.get(budget_type)
+
+    def get_user_budget_dict(self):
+        return self._budget
 
     def show_specific_budget(self):
         budget = self.get_user_budget()

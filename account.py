@@ -1,3 +1,4 @@
+import user
 from budget import BudgetTypeEnum
 
 
@@ -7,9 +8,7 @@ class Account:
     """
 
     def __init__(self, user_list):
-        self._user_dict = user_list # dictionary
-        # self._user = User
-        # self._test = Test()
+        self._user_dict = user_list  # dictionary
 
     def display_login_menu(self, users):
         print("Currently registered users are ")
@@ -54,26 +53,36 @@ class Account:
                 continue
             user_input = int(string_input)
             current_user = self._user_dict.get_current_user(current_user_index)
+            current_user_type = current_user.get_user_type()
             current_user_bank = self._user_dict.get_current_bank(current_user_index)
 
-
             if user_input == 1:
-                #bank
+                for budget in current_user.get_user_budget_dict().values():
+                    print(budget.budget_summary())
                 user_input = input("Press Enter to continue")
             elif user_input == 2:
-                new_transaction = transaction.add_transaction()
-                new_transaction_type = new_transaction.get_budget_type_for_key()
-                print(new_transaction_type)
-                current_user_budget_type = current_user.get_user_budget(new_transaction_type)
-                print(current_user_budget_type)
-                if current_user_bank.is_enough_balance(new_transaction):
-                    if not current_user_budget_type.get_is_locked_status(): # if the budget is not locked
-                        current_user_bank.update_balance(new_transaction)  # before updating bank balance
-                        current_user_bank.add_to_transaction_list(new_transaction)
-                    # I have to check budget limit
-                        current_user.add_transaction_to_budget(new_transaction)
+                if current_user_type == user.UserTypes.REBEL.value and \
+                        current_user.is_locked_user():
+                    print("Your account has been locked.")
+
                 else:
-                    print("Out of balance!")
+                    new_transaction = transaction.add_transaction()
+                    new_transaction_type = new_transaction.get_budget_type_for_key()
+                    current_user_budget_type = current_user.get_user_budget(new_transaction_type)
+                    # print(current_user_budget_type)
+                    print(current_user.get_user_type())
+                    current_user_budget_type.setup_user_budget_type(current_user_type)
+                    if current_user_bank.is_enough_balance(new_transaction):
+                        if not current_user_budget_type.is_locked_budget(
+                                new_transaction):  # if the budget is not locked
+                            current_user_bank.update_balance(new_transaction)  # before updating bank balance
+                            current_user_bank.add_to_transaction_list(new_transaction)
+                            current_user.add_transaction_to_budget(new_transaction)
+                        else:
+                            print("Sorry your budget is locked. You cannot record new transaction")
+                            current_user.add_to_locked_budget_list(current_user_budget_type)
+                    else:
+                        print("Out of balance!")
             elif user_input == 3:  # show transaction by budget
                 print("Please select one budget")
                 print("-----------------------")
@@ -83,7 +92,6 @@ class Account:
                 print("4. Miscellaneous")
                 budget_type_helper = None
                 to_show_user_budget_type = int(input("Enter the budget type number: "))
-                print(to_show_user_budget_type)
                 if to_show_user_budget_type == 1:
                     print("Game and Entertainment")
                     print("==============================================================")
@@ -104,8 +112,6 @@ class Account:
                     print("==============================================================")
                     budget_type_helper = current_user.get_user_budget(BudgetTypeEnum.MIS.name)
                     budget_type_helper.show_budget_record()
-                print("Please select one of the budget type")
-
                 user_input = input("Press Enter to continue")
             elif user_input == 4:
                 # print all the approved transactions up to now
