@@ -47,7 +47,7 @@ On startup, the user (usually a parent) must register their child's financial de
 ### User types
 There are three user types.
 - **The Angel**
-    - The Angel represents a user whose parents are not worried at all. This child has never (as far as their parents are concerned) broken a single rule. They already have a five-year plan in place and a roadmap which is guaranteed to get them into Harvard. The Angel is the child who would set up their own FAM account so they can monitor their expenses.
+    - The Angel represents a user whose parents are not worried at all. This child has never (as far as their parents are concerned) broken a single rule. They already have a five-year plan in place and a roadmap which is guaranteed to get them into Harvard. The Angel is the child who would set up their own FAM account, so they can monitor their expenses.
     - This user type:
         - Gets a notification if they exceed more than 90% of a budget.
         - Gets politely notified if they exceed a budget category.
@@ -66,7 +66,7 @@ There are three user types.
         - Gets a notification if they exceed more than 50% of a budget category.
         - Gets ruthlessly notified if they exceed a budget category.
         - Gets locked out of conducting transactions in a budget category if they exceed it by 100% of the amount assigned to the budget in question.
-        - If they exceed their budget in 2 or more categories then they get locked out of their account completely
+        - If they exceed their budget in 2 or more categories than they get locked out of their account completely
 
 ### Lock out
 The app has the ability to lock a user out of recording transactions (and effectively spending any money) based on certain conditions as specified by their User Type (more on this in the User Types section below).
