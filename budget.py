@@ -102,7 +102,7 @@ class Budget:
         if self.get_user_budget_type() == "Angel":  # angel case, never lock the account
             return self.get_is_locked_status()
         else:
-            if self._spent_amount + transaction.get_dollar_amount() >= self.get_lockout_budget_limit():
+            if self._spent_amount + transaction.get_dollar_amount() > self.get_lockout_budget_limit():
                 self.lock_budget()  # true, met the warning limit
         return self.get_is_locked_status()
 
@@ -116,23 +116,46 @@ class Budget:
         """
 
         if self.get_user_budget_type() == "Angel":
-            if self._spent_amount + transaction.get_dollar_amount() >= self.get_total_budget():
-                self.prompt_gentle_exceeding_message()
+            if self._spent_amount + transaction.get_dollar_amount() > self.get_total_budget():
+                self.prompt_angel_exceeding_message()
             else:
-                self.prompt_gentle_warning_message()
+                if self.is_met_warning_budget_limit(transaction):
+                    self.prompt_gentle_warning_message()
             self._budget_record.append(transaction)
             self.update_spend_amount(transaction.get_dollar_amount())
+        elif self.get_user_budget_type() == "Trouble Maker":
+            if self._spent_amount + transaction.get_dollar_amount() > self.get_lockout_budget_limit():
+                self.prompt_gentle_exceeding_message()
+                self.lock_budget()
+                return
+            else:
+                if self.is_met_warning_budget_limit(transaction):
+                    self.prompt_gentle_warning_message()
+                self._budget_record.append(transaction)
+                self.update_spend_amount(transaction.get_dollar_amount())
         else:
-            if self.is_met_warning_budget_limit(transaction):
-                if self.get_user_budget_type() == "Trouble Maker":
-                    self.prompt_gentle_exceeding_message()
-                else:
+            if self._spent_amount + transaction.get_dollar_amount() > self.get_lockout_budget_limit():
+                self.prompt_strong_exceeding_message()
+                self.lock_budget()
+                return
+            else:
+                if self.is_met_warning_budget_limit(transaction):
                     self.prompt_strong_warning_message()
                 self._budget_record.append(transaction)
                 self.update_spend_amount(transaction.get_dollar_amount())
-            else:
-                self._budget_record.append(transaction)
-                self.update_spend_amount(transaction.get_dollar_amount())
+
+            # if self.is_met_warning_budget_limit(transaction):
+            #     if self.get_user_budget_type() == "Trouble Maker":
+            #         self.prompt_gentle_exceeding_message()
+            #     else:
+            #         self.prompt_strong_warning_message()
+            #         if self.get_user_budget_type() == "Rebel":
+            #             self.prompt_strong_exceeding_message()
+            #     self._budget_record.append(transaction)
+            #     self.update_spend_amount(transaction.get_dollar_amount())
+            # else:
+            #     self._budget_record.append(transaction)
+            #     self.update_spend_amount(transaction.get_dollar_amount())
 
     def prompt_gentle_warning_message(self):
         """
@@ -145,7 +168,14 @@ class Budget:
         """
         Gentle exceeding message
         """
-        message = f"You exceed the budget limit: ${self._spent_amount} - {self.get_warning_budget_limit()}"
+        message = f"You exceed the budget limit. Transaction failed."
+        print(message)
+
+    def prompt_angel_exceeding_message(self):
+        """
+        Gentle exceeding message
+        """
+        message = f"You exceed the budget limit."
         print(message)
 
     def prompt_strong_warning_message(self):
@@ -155,11 +185,11 @@ class Budget:
         message = f"Do not waste your money!!!"
         print(message)
 
-    def prompt_strong_exceed_message(self):
+    def prompt_strong_exceeding_message(self):
         """
         Special exceeding message for Rebel
         """
-        message = f"Your budget is frozen!!! You are banned!"
+        message = f"Transaction is Denied. Your budget is frozen!!! You are banned!!!"
         print(message)
 
     def prompt_lock_message(self):

@@ -35,7 +35,7 @@ class User:
                         }
         self._locked_budget_list = []
         self.login_status = login_status
-        # self._is_locked_user = False
+        self._is_locked_user = False
 
     def add_transaction_to_budget(self, transaction):
         budget_type_of_transaction = transaction.get_budget_type()
@@ -273,6 +273,9 @@ class User:
             elif option == 1:
                 print(f"{cnt}. {user_data.get_user_name()}")
                 cnt += 1
+
+    def get_user_locked_out_status(self):
+        return self._is_locked_user
 
     def set_user_name(self, name):
         self._user_name = name

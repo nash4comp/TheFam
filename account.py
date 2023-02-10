@@ -61,26 +61,37 @@ class Account:
                     print(budget.budget_summary())
                 user_input = input("Press Enter to continue")
             elif user_input == 2:
+                # print(current_user.get_user_locked_out_status())
+                # print(len(current_user._locked_budget_list))
+                # print(current_user)
+                print(current_user_type)
                 if current_user_type == user.UserTypes.REBEL.value and \
-                        current_user.is_locked_user():
+                        current_user.get_user_locked_out_status():
                     print("Your account has been locked.")
-
                 else:
                     new_transaction = transaction.add_transaction()
                     new_transaction_type = new_transaction.get_budget_type_for_key()
                     current_user_budget_type = current_user.get_user_budget(new_transaction_type)
-                    # print(current_user_budget_type)
-                    print(current_user.get_user_type())
                     current_user_budget_type.setup_user_budget_type(current_user_type)
                     if current_user_bank.is_enough_balance(new_transaction):
                         if not current_user_budget_type.is_locked_budget(
                                 new_transaction):  # if the budget is not locked
+                            current_user.add_transaction_to_budget(new_transaction)
                             current_user_bank.update_balance(new_transaction)  # before updating bank balance
                             current_user_bank.add_to_transaction_list(new_transaction)
-                            current_user.add_transaction_to_budget(new_transaction)
                         else:
-                            print("Sorry your budget is locked. You cannot record new transaction")
-                            current_user.add_to_locked_budget_list(current_user_budget_type)
+                            if current_user_type == user.UserTypes.REBEL.value:
+                                current_user_budget_type.prompt_strong_exceeding_message()
+                                current_user.add_to_locked_budget_list(current_user_budget_type)
+                                current_user.is_locked_user()
+                            elif current_user_type == user.UserTypes.TROUBLE_MAKER.value:
+                                current_user_budget_type.prompt_gentle_exceeding_message()
+                                current_user.add_to_locked_budget_list(current_user_budget_type)
+                            elif current_user_type == user.UserTypes.ANGEL.value:
+                                print("Angel in us")
+                                current_user_budget_type.prompt_angel_exceeding_message()
+                            else:
+                                print("Please check your user type")
                     else:
                         print("Out of balance!")
             elif user_input == 3:  # show transaction by budget
@@ -114,9 +125,6 @@ class Account:
                     budget_type_helper.show_budget_record()
                 user_input = input("Press Enter to continue")
             elif user_input == 4:
-                # print all the approved transactions up to now
-                # print the closing balance
-                # bank method to print out the all the approved transactions
                 current_user_bank.view_bank_account_menu()
                 user_input = input("Press Enter to continue")
             elif user_input == 6:

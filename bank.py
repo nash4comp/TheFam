@@ -5,7 +5,6 @@ class Bank:
     """
     Bank class handles everything related to Bank.
     Check and update the balance.
-
     """
 
     def __init__(self, account_number="", balance=0.0, bank_name=""):
