@@ -25,7 +25,7 @@ The program provides different moderation level for each user type such as budge
 4. Taylor (Trouble Maker) - LOCKED
 Log in as (If you are not registered, please enter 0.):
 ```
-The locked user who tries to login will not be able to login and will be notified that the account is locked. If you don't have an account, you can register a new user by entering 0.
+The locked user who tries to log in will not be able to log in and will be notified that the account is locked. If you don't have an account, you can register a new user by entering 0.
 
 
 
