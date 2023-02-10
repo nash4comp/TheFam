@@ -1,3 +1,15 @@
+"""
+TODO Taylor: Write a description here
+
+# Name1: Nash Baek (nash4comp@gmail.com)
+# Student number1: A01243888
+
+# Name2: Taylor Ji (taylor.ji719@gmail.com)
+# Student number2: A01304056
+
+UML diagram: https://app.diagrams.net/#G1DUxHF4SH4QveN8GbqGaHewuu07bC5lDG
+"""
+
 from enum import Enum
 
 

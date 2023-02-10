@@ -1,3 +1,15 @@
+"""
+This file is for test some functions of this program.
+
+# Name1: Nash Baek (nash4comp@gmail.com)
+# Student number1: A01243888
+
+# Name2: Taylor Ji (taylor.ji719@gmail.com)
+# Student number2: A01304056
+
+UML diagram: https://app.diagrams.net/#G1DUxHF4SH4QveN8GbqGaHewuu07bC5lDG
+"""
+
 import user
 from user import User
 
