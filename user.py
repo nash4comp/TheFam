@@ -1,10 +1,10 @@
-""" TODO
-Explanation
+"""
+This file manages users' information. And it also supports user management.
 
 # Name1: Nash Baek (nash4comp@gmail.com)
 # Student number1: A01243888
 
-# Name2: Taylor Ji TODO: add email in here
+# Name2: Taylor Ji (taylor.ji719@gmail.com)
 # Student number1: A01304056
 
 UML diagram: https://app.diagrams.net/#G1DUxHF4SH4QveN8GbqGaHewuu07bC5lDG
@@ -16,6 +16,10 @@ from budget import Budget
 from budget import BudgetTypeEnum
 from transaction import Transaction
 
+ANGEL_LIMIT_FACTOR = 0.9
+TROUBLEMAKER_LIMIT_FACTOR = 0.75
+REBEL_LIMIT_FACTOR = 0.5
+
 
 class UserTypes(Enum):
     """
@@ -26,7 +30,6 @@ class UserTypes(Enum):
     REBEL = "Rebel"
 
 
-# TODO Think about putting unique ID variable into each account.
 class User:
     """
     This class manages users' information.
@@ -51,6 +54,7 @@ class User:
         self.login_status = login_status
 
     def add_transaction_to_budget(self, transaction):
+        """ TODO Add comments """
         budget_type_of_transaction = transaction.get_budget_type()
         if budget_type_of_transaction == BudgetTypeEnum.GE.value:
             game_entertainment = self._budget.get("GE")  # GE budget
@@ -75,6 +79,7 @@ class User:
             print("Please check your budget type")
 
     def show_transaction_by_budget(self):
+        """ TODO Add comments """
         print("Game and Entertainment: ")
         self._budget.get("GE").show_budget_record()
         print("Clothing and Accessories: ")
@@ -126,9 +131,6 @@ class User:
         :return: the user's budget
         """
         return self._budget.get(budget_type)
-
-    # def get_warning_budget_limit(self, budget_type):
-    #     return self._budget.get_warning_budget_limit(budget_type)
 
     def get_bank_name(self):
         """
@@ -200,11 +202,11 @@ class User:
                 print("Please enter a valid number.")
                 continue
             if new_user_type == 1:
-                new_user_limit_factor = 0.9
+                new_user_limit_factor = ANGEL_LIMIT_FACTOR
             elif new_user_type == 2:
-                new_user_limit_factor = 0.75
+                new_user_limit_factor = TROUBLEMAKER_LIMIT_FACTOR
             elif new_user_type == 3:
-                new_user_limit_factor = 0.5
+                new_user_limit_factor = REBEL_LIMIT_FACTOR
             else:
                 print("Please select the type from 1 - 3.")
 
@@ -260,6 +262,9 @@ class User:
                  bank_name=new_user_bank_name))
 
     def quick_add_user(self):
+        """
+        This method is for adding a new user for initial setting for login.
+        """
         self._users.append(User(user_name="Jeff",
                                 user_age=37,
                                 user_type="Angel",
@@ -283,6 +288,10 @@ class User:
                                 bank_name="CIBC"))
 
     def list_user(self, option):
+        """
+        This method is for listing all users.
+        :param option: 0 list all users, 1 list only username.
+        """
         cnt = 1
         for user_data in self._users:
             if option == 0:
@@ -305,63 +314,107 @@ class User:
                 print(f"{cnt}. {user_data.get_user_name()}")
                 cnt += 1
 
-
     def set_user_name(self, name):
+        """
+        This method is for setting username.
+        :param name: username
+        """
         self._user_name = name
 
     def set_user_age(self, age):
+        """
+        This method is for setting user age.
+        :param age: user age
+        """
         self._user_age = age
 
     def set_user_type(self, user_type):
+        """
+        This method is for setting user type.
+        :param user_type: ANGEL, REBEL or TROUBLE MAKER
+        """
         self._user_type = user_type
 
     def set_user_bank_account_number(self, account_number):
+        """
+        This method is for setting user bank account number.
+        :param account_number: user's bank account number
+        """
         self._bank.set_account_number(account_number)
 
     def set_user_bank_balance(self, balance):
+        """
+        This method is for setting user bank balance.
+        :param balance: user's bank balance
+        """
         self._bank.set_balance(balance)
 
-    # def set_user_budget(self, budget):
-    #     self._budget.set_total_budget(budget)
-    #
-    # def set_warning_budget_limit(self, budget_limit):
-    #     self._budget.set_warning_budget_limit(budget_limit)
-
     def set_bank_name(self, bank_name):
+        """
+        This method is for setting user bank name.
+        :param bank_name: user's bank name
+        """
         return self._bank.set_bank_name(bank_name)
 
     def set_login_status(self, index, login_status):
+        """
+        This method is for setting user login status.
+        :param index: the index of the current user in the list
+        :param login_status: True if this user is current user else False
+        """
         self._users[index - 1].login_status = login_status
-        # print(self._users[index - 1].get_user_name())
-        # print(self._users[index - 1].get_login_status())
 
 
 class Angel(User):
+    """
+    This class is for Angel user.
+    """
     def __init__(self):
         super().__init__()
-
     pass
 
 
 class TroubleMaker(User):
+    """
+    This class is for Trouble Maker user.
+    """
     def __init__(self):
         super().__init__()
         self._is_locked_out = False
 
     def get_user_locked_out_status(self):
+        """
+        This method is for getting user locked out status.
+        :return: the status of user locked out
+        """
         return self._is_locked_out
 
     def set_user_locked_out_status(self, locked_out_status):
+        """
+        This method is for setting user locked out status.
+        :param locked_out_status: the status of user locked out
+        """
         self._is_locked_out = locked_out_status
 
 
 class Rebel(User):
+    """
+    This class is for Rebel user.
+    """
     def __init__(self):
         super().__init__()
         self._is_locked_out = False
 
     def get_user_locked_out_status(self):
+        """
+        This method is for getting user locked out status.
+        :return: the status of user locked out
+        """
         return self._is_locked_out
 
     def set_user_locked_out_status(self, locked_out_status):
+        """
+        This method is for setting user locked out status.
+        :param locked_out_status: the status of user locked out
+        """
         self._is_locked_out = locked_out_status

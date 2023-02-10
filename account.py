@@ -1,4 +1,14 @@
-from user import User
+"""
+This file is for user account management.
+
+# Name1: Nash Baek (nash4comp@gmail.com)
+# Student number1: A01243888
+
+# Name2: Taylor Ji (taylor.ji719@gmail.com)
+# Student number1: A01304056
+
+UML diagram: https://app.diagrams.net/#G1DUxHF4SH4QveN8GbqGaHewuu07bC5lDG
+"""
 
 
 class Account:
@@ -8,10 +18,12 @@ class Account:
 
     def __init__(self, user_list):
         self._user_list = user_list
-        # self._user = User
-        # self._test = Test()
 
     def display_login_menu(self, users):
+        """
+        This method displays the login menu.
+        :param users: the user object
+        """
         print("Currently registered users are ")
         users.list_user(1)
         user_cnt = self._user_list.get_user_count()
@@ -31,6 +43,12 @@ class Account:
         self._user_list.set_login_status(user_number, True)
 
     def display_account_menu(self, transaction, users, bank):
+        """
+        This method displays the main menu.
+        :param transaction: the transaction object
+        :param users: the user object
+        :param bank: the bank object
+        """
         users.quick_add_user()
         self.display_login_menu(users)
         user_input = None
@@ -79,6 +97,5 @@ class Account:
             else:
                 print("Could not process the input. Please enter a"
                       " number from 1 - 5.")
-
         print("Thank you for using the FAM system.")
         pass

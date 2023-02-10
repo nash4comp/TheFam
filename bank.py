@@ -1,3 +1,16 @@
+"""
+TODO Taylor: Write a description here
+
+# Name1: Nash Baek (nash4comp@gmail.com)
+# Student number1: A01243888
+
+# Name2: Taylor Ji (taylor.ji719@gmail.com)
+# Student number1: A01304056
+
+UML diagram: https://app.diagrams.net/#G1DUxHF4SH4QveN8GbqGaHewuu07bC5lDG
+"""
+
+
 class Bank:
 
     def __init__(self, account_number="", balance=0.0, bank_name=""):
@@ -6,6 +19,11 @@ class Bank:
         self._bank_name = bank_name
 
     def is_enough_balance(self, transaction):
+        """
+        TODO Taylor: Write a description here
+        :param transaction:
+        :return:
+        """
         """
         Check if the user has enough balance to add a new transaction
         """
