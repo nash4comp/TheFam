@@ -5,7 +5,7 @@ This file is for user account management.
 # Student number1: A01243888
 
 # Name2: Taylor Ji (taylor.ji719@gmail.com)
-# Student number1: A01304056
+# Student number2: A01304056
 
 UML diagram: https://app.diagrams.net/#G1DUxHF4SH4QveN8GbqGaHewuu07bC5lDG
 """
@@ -21,6 +21,7 @@ class Account:
 
     def display_login_menu(self, users):
         """
+        TODO Clean up this menu items
         This method displays the login menu.
         :param users: the user object
         """
@@ -52,7 +53,7 @@ class Account:
         users.quick_add_user()
         self.display_login_menu(users)
         user_input = None
-        while user_input != 0:
+        while user_input != 8:
             print(f"\nHello, {self._user_list.get_current_user_name(users.get_current_user_index())}!")
             print("Welcome to the FAM system.")
             print("-----------------------")
@@ -61,11 +62,11 @@ class Account:
             print("3. View Transactions by Budget")
             print("4. View Bank Account Details")
             print("---<User management>---")
-            print("6. Register User")
-            print("7. List up Users")
-            print("9. Switch User")
-            print("0. Quit")
-            string_input = input("Please enter your choice (0-9)")
+            print("5. Register User")
+            print("6. List up Users")
+            print("7. Switch User")
+            print("8. Quit")
+            string_input = input("Please enter your choice (0-8)")
 
             if string_input == '':
                 continue
@@ -86,13 +87,13 @@ class Account:
             elif user_input == 4:
                 print(bank)
                 user_input = input("Press Enter to continue")
-            elif user_input == 6:
+            elif user_input == 5:
                 users.register_user()
-            elif user_input == 7:
+            elif user_input == 6:
                 users.list_user(0)
-            elif user_input == 9:
+            elif user_input == 7:
                 self.display_login_menu(users)
-            elif user_input == 0:
+            elif user_input == 8:
                 pass
             else:
                 print("Could not process the input. Please enter a"

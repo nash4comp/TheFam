@@ -9,7 +9,7 @@ It allows parents to set a budget for their children and monitor their spending.
 # Student number1: A01243888
 
 # Name2: Taylor Ji (taylor.ji719@gmail.com)
-# Student number1: A01304056
+# Student number2: A01304056
 
 UML diagram: https://app.diagrams.net/#G1DUxHF4SH4QveN8GbqGaHewuu07bC5lDG
 """
