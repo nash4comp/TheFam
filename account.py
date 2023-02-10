@@ -21,7 +21,6 @@ class Account:
 
     def display_login_menu(self, users):
         """
-        TODO Clean up this menu items
         This method displays the login menu.
         :param users: the user object
         """
@@ -29,18 +28,32 @@ class Account:
         print("Currently registered users are ")
         users.list_user(1)
         user_cnt = self._user_list.get_user_count()
-        user_number = 0
+        user_number = -1
         for index in range(user_cnt):
             self._user_list.set_login_status(index, False)
             index += 1
-        while (user_number < 1) or (user_number > user_cnt):
-            user_number = input("Log in as: ")
+        while (user_number < 0) or (user_number > user_cnt):
+            user_cnt = self._user_list.get_user_count()
+            user_number = input("Log in as (If you are not registered, please enter 0.): ")
             if user_number == '':
                 user_number = -1
             try:
                 user_number = int(user_number)
             except ValueError:
                 user_number = -1
+            if int(user_number) == 0:
+                if users.register_user() != -1:
+                    for index in range(user_cnt):
+                        self._user_list.set_login_status(index, False)
+                        index += 1
+                    user_number = -1
+                    users.list_user(1)
+                    continue
+                else:
+                    user_number = -1
+            if (user_number < 1) or (user_number > user_cnt):
+                user_number = -1
+                continue
             if self._user_list.get_current_user_lock_status(user_number - 1):
                 print("This user is locked out.")
                 user_number = -1

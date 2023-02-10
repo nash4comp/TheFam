@@ -202,13 +202,13 @@ class User:
         new_user_name = input("Name: ")
         if new_user_name == '':
             print("Please enter a valid name.")
-            return
+            return -1
         new_user_age = input("Age: ")
         try:
             new_user_age = int(new_user_age)
         except ValueError:
             print("Please enter a valid number for age.")
-            return
+            return -1
 
         new_user_type = 0
         new_user_limit_factor = 0
@@ -239,19 +239,19 @@ class User:
         new_user_account_number = input("Account number: ")
         if new_user_account_number == '':
             print("Please enter a valid account number.")
-            return
+            return -1
 
         new_user_bank_name = input("Bank name: ")
         if new_user_bank_name == '':
             print("Please enter a bank name.")
-            return
+            return -1
 
         new_user_bank_balance = input("Bank balance: ")
         try:
             new_user_bank_balance = float(new_user_bank_balance)
         except ValueError:
             print("Please enter a valid number for balance.")
-            return
+            return -1
 
         new_user_budget_ge = input("Game and Entertainment Budget: ")
         new_user_budget_ca = input("Clothing and Accessories Budget: ")
@@ -265,7 +265,7 @@ class User:
             new_user_budget_mis = float(new_user_budget_mis)
         except ValueError:
             print("Please enter a valid number for budget.")
-            return
+            return -1
 
         new_user_budget_limit_ge = new_user_limit_factor * new_user_budget_ge
         new_user_budget_limit_ca = new_user_limit_factor * new_user_budget_ca
