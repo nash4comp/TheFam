@@ -17,6 +17,18 @@ This program will register a user, keep track of all the spending/transactions o
 
 The program provides different moderation level for each user type such as budget limit, locking-up the account, and so on.
 
+### Login Menu
+```
+1. Jeff (Angel)
+2. Mike (Angel)
+3. Nash (Rebel) - LOCKED
+4. Taylor (Trouble Maker) - LOCKED
+Log in as (If you are not registered, please enter 0.):
+```
+The locked user who tries to login will not be able to login and will be notified that the account is locked. If you don't have an account, you can register a new user by entering 0.
+
+
+
 ### User Menu
 1. View Budgets
     - Selecting this option should show the user the current status of their budgets (locked or not) in addition to the amount spent, amount left, and the total amount allocated to the budget.
@@ -105,11 +117,4 @@ Depending on the type of user, after a transaction has been recorded your system
 - The program is not supporting the database.
 - The program is not supporting the GUI.
 - Some corner cases are not covered such as sanity check for the bank account number, bank balance, and so on. Only checking the type of the input is done.
-- Removing, editing the users information is not supported.
-
-
-
-
-
-
-
+- Removing, editing the users information for administrative user is not supported.
