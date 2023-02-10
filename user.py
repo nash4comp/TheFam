@@ -37,9 +37,9 @@ class User:
     user_type_list = UserTypes
 
     def __init__(self, user_name="", user_age=0, user_type="", account_number="", balance=0.0, bank_name="",
-                 budget=None, login_status=False):
+                 budget=None, login_status=False, is_locked_out=False):
         if budget is None:
-            budget = [[0, 0], [0, 0], [0, 0], [0, 0]]
+            budget = [[0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0]]
         self._users = []
         self._user_name = user_name
         self._user_age = user_age
@@ -52,6 +52,7 @@ class User:
                         "MIS": Budget("Miscellaneous", budget[3][0], budget[3][1])
                         }
         self.login_status = login_status
+        self._is_locked_out = is_locked_out
 
     def add_transaction_to_budget(self, transaction):
         """ TODO Add comments """
@@ -109,6 +110,13 @@ class User:
         :return: the user's type
         """
         return self._user_type
+
+    def get_user_locked_status(self):
+        """
+        This method returns the user's type
+        :return: the user's type
+        """
+        return self._is_locked_out
 
     def get_user_bank_account_number(self):
         """
@@ -171,6 +179,21 @@ class User:
         :return: the name of the current user
         """
         return self._users[index].get_user_name()
+
+    def get_current_user_type(self, index):
+        """
+        This method returns the type of the current(login) user.
+        :param index: the index of the current user
+        :return: the type of the current user
+        """
+        return self._users[index].get_user_type()
+
+    def get_current_user_lock_status(self, index):
+        """
+        This method returns the user's lock status.
+        :return: the user's lock status
+        """
+        return self._users[index].get_user_locked_status()
 
     def register_user(self):
         """
@@ -271,21 +294,32 @@ class User:
                                 account_number="1234567",
                                 balance=1000,
                                 budget=[[100, 90], [200, 180], [300, 270], [400, 360]],
-                                bank_name="TD"))
+                                bank_name="TD",
+                                is_locked_out=False))
+        self._users.append(User(user_name="Mike",
+                                user_age=37,
+                                user_type="Angel",
+                                account_number="9785567",
+                                balance=1000,
+                                budget=[[100, 90], [200, 180], [300, 270], [400, 360]],
+                                bank_name="TD",
+                                is_locked_out=False))
         self._users.append(User(user_name="Nash",
                                 user_age=43,
                                 user_type="Rebel",
                                 account_number="9876543",
                                 balance=2000,
                                 budget=[[200, 150], [300, 225], [400, 300], [500, 375]],
-                                bank_name="RBC"))
+                                bank_name="RBC",
+                                is_locked_out=True))
         self._users.append(User(user_name="Taylor",
                                 user_age=27,
                                 user_type="Trouble Maker",
                                 account_number="1357911",
                                 balance=5000,
                                 budget=[[500, 250], [600, 300], [700, 350], [800, 400]],
-                                bank_name="CIBC"))
+                                bank_name="CIBC",
+                                is_locked_out=True))
 
     def list_user(self, option):
         """
@@ -311,7 +345,10 @@ class User:
                       )
                 cnt += 1
             elif option == 1:
-                print(f"{cnt}. {user_data.get_user_name()}")
+                if self.get_current_user_lock_status(cnt-1):
+                    print(f"{cnt}. {user_data.get_user_name()} ({user_data.get_user_type()}) - LOCKED")
+                else:
+                    print(f"{cnt}. {user_data.get_user_name()} ({user_data.get_user_type()})")
                 cnt += 1
 
     def set_user_name(self, name):
@@ -369,8 +406,10 @@ class Angel(User):
     """
     This class is for Angel user.
     """
+
     def __init__(self):
         super().__init__()
+
     pass
 
 
@@ -378,6 +417,7 @@ class TroubleMaker(User):
     """
     This class is for Trouble Maker user.
     """
+
     def __init__(self):
         super().__init__()
         self._is_locked_out = False
@@ -401,6 +441,7 @@ class Rebel(User):
     """
     This class is for Rebel user.
     """
+
     def __init__(self):
         super().__init__()
         self._is_locked_out = False

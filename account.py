@@ -25,6 +25,7 @@ class Account:
         This method displays the login menu.
         :param users: the user object
         """
+        print("\nWelcome to the FAM system.")
         print("Currently registered users are ")
         users.list_user(1)
         user_cnt = self._user_list.get_user_count()
@@ -40,6 +41,9 @@ class Account:
                 user_number = int(user_number)
             except ValueError:
                 user_number = -1
+            if self._user_list.get_current_user_lock_status(user_number - 1):
+                print("This user is locked out.")
+                user_number = -1
 
         self._user_list.set_login_status(user_number, True)
 
@@ -54,14 +58,15 @@ class Account:
         self.display_login_menu(users)
         user_input = None
         while user_input != 8:
-            print(f"\nHello, {self._user_list.get_current_user_name(users.get_current_user_index())}!")
-            print("Welcome to the FAM system.")
+            user_index = users.get_current_user_index()
+            print(
+                f"\nHello, {self._user_list.get_current_user_name(user_index)} "
+                f"({self._user_list.get_current_user_type(user_index)})!")
             print("-----------------------")
             print("1. View Budgets")
             print("2. Record a Transaction")
             print("3. View Transactions by Budget")
             print("4. View Bank Account Details")
-            print("---<User management>---")
             print("5. Register User")
             print("6. List up Users")
             print("7. Switch User")
