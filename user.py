@@ -1,3 +1,14 @@
+""" TODO
+Explanation
+
+# Name1: Nash Baek (nash4comp@gmail.com)
+# Student number1: A01243888
+
+# Name2: Taylor Ji TODO: add email in here
+# Student number1: A01304056
+
+UML diagram: https://app.diagrams.net/#G1DUxHF4SH4QveN8GbqGaHewuu07bC5lDG
+"""
 from enum import Enum
 
 from bank import Bank
@@ -7,6 +18,9 @@ from transaction import Transaction
 
 
 class UserTypes(Enum):
+    """
+    This class defines three different user types.
+    """
     ANGEL = "Angel"
     TROUBLE_MAKER = "Trouble Maker"
     REBEL = "Rebel"
@@ -71,36 +85,77 @@ class User:
         self._budget.get("MIS").show_budget_record()
 
     def get_user_name(self):
+        """
+        This method returns the user's name.
+        :return: the username
+        """
         return self._user_name
 
     def get_user_age(self):
+        """
+        This method returns the user's age.
+        :return: the user's age
+        """
         return self._user_age
 
     def get_user_type(self):
+        """
+        This method returns the user's type
+        :return: the user's type
+        """
         return self._user_type
 
     def get_user_bank_account_number(self):
+        """
+        This method returns the user's bank account number.
+        :return: the user's bank account number
+        """
         return self._bank.get_account_number()
 
     def get_user_bank_balance(self):
+        """
+        This method returns the user's bank balance.
+        :return: the user's bank balance
+        """
         return self._bank.get_balance()
 
     def get_user_budget(self, budget_type):
+        """
+        This method returns the user's budget.
+        :param budget_type: the budget type to get
+        :return: the user's budget
+        """
         return self._budget.get(budget_type)
 
     # def get_warning_budget_limit(self, budget_type):
     #     return self._budget.get_warning_budget_limit(budget_type)
 
     def get_bank_name(self):
+        """
+        This method returns the user's bank name.
+        :return: the user's bank name
+        """
         return self._bank.get_bank_name()
 
     def get_login_status(self):
+        """
+        This method returns the user's login status.
+        :return: the user's login status
+        """
         return self.login_status
 
     def get_user_count(self):
+        """
+        This method returns the number of users.
+        :return: the number of users
+        """
         return self._users.__len__()
 
     def get_current_user_index(self):
+        """
+        This method returns the index of the current(login) user.
+        :return: the index of the current user
+        """
         index = 0
         for i in self._users:
             if self._users[index].login_status:
@@ -108,9 +163,17 @@ class User:
             index += 1
 
     def get_current_user_name(self, index):
+        """
+        This method returns the name of the current(login) user.
+        :param index: the index of the current user
+        :return: the name of the current user
+        """
         return self._users[index].get_user_name()
 
     def register_user(self):
+        """
+        This method is for registering a new user.
+        """
         new_user_name = input("Name: ")
         if new_user_name == '':
             print("Please enter a valid name.")
