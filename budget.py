@@ -55,7 +55,8 @@ class Budget:
         self._warning_budget_limit = budget_limit
 
     def __str__(self):
-        return "\n - " + self._budget_type_name + ": " + str(self._total_budget) + " / " + str(self._warning_budget_limit)
+        return "\n - " + self._budget_type_name + ": " + str(self._total_budget) + " / " + str(
+            self._warning_budget_limit)
 
 
 class BudgetTypeEnum(Enum):
