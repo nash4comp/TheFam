@@ -25,10 +25,16 @@ class FAM:
     """
 
     def __init__(self):
+        """
+        This is the constructor for this class.
+        """
         self._account = Account("")
 
 
 def main():
+    """
+    This is the main method for this program.
+    """
     users = User("Test", 13, "Angel", "a1302", "td", 120.85, [[100, 60], [200, 120],
                                                               [400, 50], [120, 60]])
     transaction = Transaction(0.0, "test", "GE")

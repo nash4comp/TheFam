@@ -1,5 +1,3 @@
-import datetime
-
 """
 This file is for bank management,
 
@@ -11,6 +9,8 @@ This file is for bank management,
 
 UML diagram: https://app.diagrams.net/#G1DUxHF4SH4QveN8GbqGaHewuu07bC5lDG
 """
+
+import datetime
 
 
 class Bank:
