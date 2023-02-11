@@ -25,6 +25,7 @@ class Transaction:
         initialize transaction with dollar amount you spent, and the store name
         :param dollar_amount: positive float
         :param shop_name: string
+        :param budget_type: string
         """
         self._raw_temp_time = (datetime.datetime.now())
         self._time_stamp = self._raw_temp_time.strftime("%c")
@@ -131,11 +132,15 @@ class Transaction:
     def set_budget_type(self, user_input_budget_type):
         """
         Setter for shop_name
-        :param user_input_shop_name
+        :param user_input_budget_type
         """
         self._budget_type = user_input_budget_type
 
     def __str__(self):
+        """
+        String representation of Transaction class
+        :return: string to print
+        """
         to_str = f"Budget type is {self.get_budget_type()}, Date is {self.get_time()}, " \
                  f"Amount spent is ${self.get_dollar_amount()}, " \
                  f"Store name is {self.get_shop_name()}"

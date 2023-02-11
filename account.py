@@ -67,7 +67,6 @@ class Account:
         This method displays the main menu.
         :param transaction: the transaction object
         :param users: the user object
-        :param bank: the bank object
         """
         users.quick_add_user()
         self.display_login_menu(users)

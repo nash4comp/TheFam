@@ -23,6 +23,8 @@ class Bank:
         """
         Construct Bank.
         Transaction List will contain all the approved transactions.
+        :param account_number: the account number
+        :param balance: the balance
         """
         self._account_number = account_number
         self._balance = balance
@@ -34,6 +36,7 @@ class Bank:
     def is_enough_balance(self, transaction):
         """
         Check if the user has enough balance to add a new transaction
+        :param transaction: the transaction to be added
         Return Boolean
         """
         is_enough = False
@@ -46,6 +49,7 @@ class Bank:
     def update_balance(self, transaction):
         """
         Update the balance by subtracting the transaction's amount
+        :param transaction: the transaction to be added
         """
         self.set_balance(self.get_balance() - transaction.get_dollar_amount())
 
@@ -70,18 +74,21 @@ class Bank:
     def set_account_number(self, account_number):
         """
         Setter for account number
+        :param account_number: the account number
         """
         self._account_number = account_number
 
     def set_balance(self, balance):
         """
         Setter for balance
+        :param balance: the balance
         """
         self._balance = balance
 
     def add_to_transaction_list(self, transaction):
         """
         Add a new transaction to the transaction list
+        :param transaction: the transaction to be added
         """
         self._transaction_list.append(transaction)
 
@@ -107,12 +114,17 @@ class Bank:
         print(statement)
 
     def __str__(self):
+        """
+        String representation of the bank
+        :return: the string representation of the bank
+        """
         statement = f"Account number: {self.get_account_number()}," \
-                    f"\nBalance %.2f{self.get_balance()}"  # format to have 2 decimal numbers
+                    f"\nBalance %.2f{self.get_balance()}"
         return statement
 
     def set_bank_name(self, bank_name):
         """
         Setter for bank name
+        :param bank_name: the bank name
         """
         self._bank_name = bank_name

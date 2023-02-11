@@ -33,7 +33,7 @@ class Budget:
         self._spent_amount = 0
         self._lockout_limit = 0
         self._remaining_budget = 0
-        self._budget_record = []  # list of transaction
+        self._budget_record = []
         self._is_budget_warning_limit_met = False
         self._is_locked = False
         self._angel_lockout_ratio = 0
@@ -119,7 +119,6 @@ class Budget:
         return self.get_is_locked_status()
 
     def add_transaction(self, transaction):
-        # do not have to worry about lock because I checked it at account
         """
         Add new transaction to this budget
         If the new transaction's cost + spent_amount does not equal or greater than budget limit
@@ -155,19 +154,6 @@ class Budget:
                     self.prompt_strong_warning_message()
                 self._budget_record.append(transaction)
                 self.update_spend_amount(transaction.get_dollar_amount())
-
-            # if self.is_met_warning_budget_limit(transaction):
-            #     if self.get_user_budget_type() == "Trouble Maker":
-            #         self.prompt_gentle_exceeding_message()
-            #     else:
-            #         self.prompt_strong_warning_message()
-            #         if self.get_user_budget_type() == "Rebel":
-            #             self.prompt_strong_exceeding_message()
-            #     self._budget_record.append(transaction)
-            #     self.update_spend_amount(transaction.get_dollar_amount())
-            # else:
-            #     self._budget_record.append(transaction)
-            #     self.update_spend_amount(transaction.get_dollar_amount())
 
     def prompt_gentle_warning_message(self):
         """
@@ -323,6 +309,10 @@ class Budget:
         return summary
 
     def __str__(self):
+        """
+        String representation of the budget
+        :return: String to print
+        """
         return "\n - " + self._budget_type_name + ": " + str(self._total_budget) + " / " + str(
             self._warning_budget_limit)
 

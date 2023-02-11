@@ -13,10 +13,7 @@ It allows parents to set a budget for their children and monitor their spending.
 
 UML diagram: https://app.diagrams.net/#G1DUxHF4SH4QveN8GbqGaHewuu07bC5lDG
 """
-import user
 from account import Account
-from bank import Bank
-from budget import Budget
 
 from transaction import Transaction
 from user import User
@@ -29,17 +26,14 @@ class FAM:
 
     def __init__(self):
         self._account = Account("")
-        # self._test = Test()
 
 
 def main():
-    bank = Bank("a1302", 120.85, "td")
     users = User("Test", 13, "Angel", "a1302", "td", 120.85, [[100, 60], [200, 120],
                                                               [400, 50], [120, 60]])
     transaction = Transaction(0.0, "test", "GE")
     my_account = Account(users)
     my_account.display_account_menu(transaction, users)
-
 
 
 if __name__ == '__main__':
