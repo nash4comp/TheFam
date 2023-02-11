@@ -85,11 +85,14 @@ class Account:
             print("6. List up Users")
             print("7. Switch User")
             print("8. Quit")
-            string_input = input("Please enter your choice (0-8)")
+            string_input = input("Please enter your choice (1-8)")
 
             if string_input == '':
                 continue
-            user_input = int(string_input)
+            try:
+                user_input = int(string_input)
+            except ValueError:
+                user_input = 0
             current_user = self._user_list.get_current_user(user_index)
             current_user_type = current_user.get_user_type()
             current_user_bank = self._user_list.get_current_bank(user_index)
@@ -171,6 +174,6 @@ class Account:
                 pass
             else:
                 print("Could not process the input. Please enter a"
-                      " number from 1 - 5.")
+                      " number from 1 - 8.")
         print("Thank you for using the FAM system.")
         pass
