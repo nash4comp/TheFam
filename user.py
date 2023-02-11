@@ -79,25 +79,20 @@ class User:
         else:
             print("Please check your budget type")
 
-    def show_transaction_by_budget(self):
-        """ TODO Add comments """
-        print("Game and Entertainment: ")
-        self._budget.get("GE").show_budget_record()
-        print("Clothing and Accessories: ")
-        self._budget.get("CA").show_budget_record()
-        print("Eat out: ")
-        self._budget.get("EO").show_budget_record()
-        print("Miscellaneous: ")
-        self._budget.get("MIS").show_budget_record()
-
     def add_to_locked_budget_list(self, budget):
         if budget not in self._locked_budget_list:
             self._locked_budget_list.append(budget)
 
     def get_locked_budget_count(self):
+        """
+        Getter for get locked budget count
+        """
         return len(self._locked_budget_list)
 
     def is_locked_user(self):
+        """
+        Check if the
+        """
         if self.get_locked_budget_count() >= 2:
             self.lock_user()
 
@@ -202,9 +197,6 @@ class User:
 
     def get_current_bank(self, index):
         return self._users[index].get_bank()  # indexed user dictionary and function
-
-    # def get_current_user_budget(self, index):
-    #     return self._users[index].get_user_budget(budget_type)
 
     def get_current_user_name(self, index):
         """
