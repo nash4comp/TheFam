@@ -67,7 +67,6 @@ class Account:
         This method displays the main menu.
         :param transaction: the transaction object
         :param users: the user object
-        :param bank: the bank object
         """
         users.quick_add_user()
         self.display_login_menu(users)
@@ -93,7 +92,6 @@ class Account:
             user_input = int(string_input)
             current_user = self._user_list.get_current_user(user_index)
             current_user_type = current_user.get_user_type()
-            # print(current_user_type)
             current_user_bank = self._user_list.get_current_bank(user_index)
 
             if user_input == 1:
@@ -101,7 +99,6 @@ class Account:
                     print(budget.budget_summary())
                 user_input = input("Press Enter to continue")
             elif user_input == 2:
-                # print(current_user_type)
                 if current_user_type == user.UserTypes.REBEL.value and \
                         current_user.get_user_locked_out_status():
                     print("Your account has been locked. You rebel!!")

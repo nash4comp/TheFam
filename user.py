@@ -10,7 +10,6 @@ This file manages users' information. And it also supports user management.
 UML diagram: https://app.diagrams.net/#G1DUxHF4SH4QveN8GbqGaHewuu07bC5lDG
 """
 from enum import Enum
-
 from bank import Bank
 from budget import Budget
 from budget import BudgetTypeEnum
@@ -37,6 +36,18 @@ class User:
 
     def __init__(self, user_name="", user_age=0, user_type="", account_number="", balance=0.0, bank_name="",
                  budget=None, login_status=False, is_locked_out=False):
+        """
+        This method initializes the user object.
+        :param user_name: user name
+        :param user_age: user age
+        :param user_type: user type
+        :param account_number: user's bank account number
+        :param balance: user's bank account balance
+        :param bank_name: user's bank name
+        :param budget: user's budget
+        :param login_status: user's login status
+        :param is_locked_out: user's lock status
+        """
         if budget is None:
             budget = [[0.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 0.0]]
         self._users = []
@@ -55,7 +66,10 @@ class User:
         self._is_locked_out = is_locked_out
 
     def add_transaction_to_budget(self, transaction):
-        """ TODO Add comments """
+        """
+        This method adds a transaction to the budget.
+        :param transaction: transaction object
+        """
         budget_type_of_transaction = transaction.get_budget_type()
         if budget_type_of_transaction == BudgetTypeEnum.GE.value:
             game_entertainment = self._budget.get("GE")  # GE budget
@@ -65,40 +79,44 @@ class User:
             clothing_accessories = self._budget.get("CA")
             clothing_accessories.add_transaction(transaction)
             print(transaction)
-            # print(clothing_accessories.show_budget_record())
         elif budget_type_of_transaction == BudgetTypeEnum.EO.value:
-            eo = self._budget.get("EO")  # GE budget
+            eo = self._budget.get("EO")
             eo.add_transaction(transaction)
             print(transaction)
-            # print(eo.show_budget_record())
         elif budget_type_of_transaction == BudgetTypeEnum.MIS.value:
-            mis = self._budget.get("MIS")  # GE budget
+            mis = self._budget.get("MIS")
             mis.add_transaction(transaction)
             print(transaction)
-            # print(mis.show_budget_record())
         else:
             print("Please check your budget type")
 
     def add_to_locked_budget_list(self, budget):
+        """
+        This method adds a budget to the locked budget list.
+        :param budget: budget object
+        """
         if budget not in self._locked_budget_list:
             self._locked_budget_list.append(budget)
 
     def get_locked_budget_count(self):
         """
-        Getter for get locked budget count
+        This method returns the number of locked budgets.
+        :return: length of the locked budget list
         """
         return len(self._locked_budget_list)
 
     def is_locked_user(self):
         """
-        Check if the
+        This method checks if the user is locked.
         """
         if self.get_locked_budget_count() >= 2:
             self.lock_user()
 
     def lock_user(self):
+        """
+        This method locks the user.
+        """
         self._is_locked_out = True
-
 
     def get_user_name(self):
         """
@@ -151,13 +169,17 @@ class User:
         return self._budget.get(budget_type)
 
     def get_user_budgets_as_whole(self):
+        """
+        This method returns the user's budget.
+        :return: dictionary of the user's budget
+        """
         return self._budget
 
-    def show_specific_budget(self):
-        budget = self.get_user_budget()
-        budget.show_budget_record()
-
     def get_bank(self):
+        """
+        This method returns the user's bank.
+        :return: bank object
+        """
         return self._bank
 
     def get_bank_name(self):
@@ -193,10 +215,20 @@ class User:
             index += 1
 
     def get_current_user(self, index):
+        """
+        This method returns the current(login) user.
+        :param index: index of the current user
+        :return: user object
+        """
         return self._users[index]
 
     def get_current_bank(self, index):
-        return self._users[index].get_bank()  # indexed user dictionary and function
+        """
+        This method returns the current(login) user's bank.
+        :param index: index of the current user
+        :return: bank object
+        """
+        return self._users[index].get_bank()
 
     def get_current_user_name(self, index):
         """
@@ -346,6 +378,22 @@ class User:
                                 budget=[[500, 250], [600, 300], [700, 350], [800, 400]],
                                 bank_name="CIBC",
                                 is_locked_out=True))
+        self._users.append(User(user_name="Jackie",
+                                user_age=27,
+                                user_type="Rebel",
+                                account_number="1357911",
+                                balance=5000,
+                                budget=[[500, 250], [600, 300], [700, 350], [800, 400]],
+                                bank_name="CIBC",
+                                is_locked_out=False))
+        self._users.append(User(user_name="Alex",
+                                user_age=27,
+                                user_type="Trouble Maker",
+                                account_number="1357911",
+                                balance=5000,
+                                budget=[[500, 375], [600, 450], [700, 525], [800, 600]],
+                                bank_name="CIBC",
+                                is_locked_out=False))
 
     def list_user(self, option):
         """
@@ -371,13 +419,17 @@ class User:
                       )
                 cnt += 1
             elif option == 1:
-                if self.get_current_user_lock_status(cnt-1):
+                if self.get_current_user_lock_status(cnt - 1):
                     print(f"{cnt}. {user_data.get_user_name()} ({user_data.get_user_type()}) - LOCKED")
                 else:
                     print(f"{cnt}. {user_data.get_user_name()} ({user_data.get_user_type()})")
                 cnt += 1
 
     def get_user_locked_out_status(self):
+        """
+        This method is for getting user locked out status.
+        :return: locked out status
+        """
         return self._is_locked_out
 
     def set_user_name(self, name):
@@ -429,62 +481,3 @@ class User:
         :param login_status: True if this user is current user else False
         """
         self._users[index - 1].login_status = login_status
-
-
-class Angel(User):
-    """
-    This class is for Angel user.
-    """
-
-    def __init__(self):
-        super().__init__()
-
-    pass
-
-
-class TroubleMaker(User):
-    """
-    This class is for Trouble Maker user.
-    """
-
-    def __init__(self):
-        super().__init__()
-        self._is_locked_out = False
-
-    def get_user_locked_out_status(self):
-        """
-        This method is for getting user locked out status.
-        :return: the status of user locked out
-        """
-        return self._is_locked_out
-
-    def set_user_locked_out_status(self, locked_out_status):
-        """
-        This method is for setting user locked out status.
-        :param locked_out_status: the status of user locked out
-        """
-        self._is_locked_out = locked_out_status
-
-
-class Rebel(User):
-    """
-    This class is for Rebel user.
-    """
-
-    def __init__(self):
-        super().__init__()
-        self._is_locked_out = False
-
-    def get_user_locked_out_status(self):
-        """
-        This method is for getting user locked out status.
-        :return: the status of user locked out
-        """
-        return self._is_locked_out
-
-    def set_user_locked_out_status(self, locked_out_status):
-        """
-        This method is for setting user locked out status.
-        :param locked_out_status: the status of user locked out
-        """
-        self._is_locked_out = locked_out_status
