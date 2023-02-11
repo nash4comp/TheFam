@@ -99,7 +99,6 @@ class Account:
                     print(budget.budget_summary())
                 user_input = input("Press Enter to continue")
             elif user_input == 2:
-                print(current_user_type)
                 if current_user_type == user.UserTypes.REBEL.value and \
                         current_user.get_user_locked_out_status():
                     print("Your account has been locked. You rebel!!")

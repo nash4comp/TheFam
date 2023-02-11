@@ -1,5 +1,5 @@
 """
-TODO Taylor: Write a description here
+Transaction file handles everything related to transaction.
 
 # Name1: Nash Baek (nash4comp@gmail.com)
 # Student number1: A01243888

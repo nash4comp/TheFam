@@ -79,17 +79,14 @@ class User:
             clothing_accessories = self._budget.get("CA")
             clothing_accessories.add_transaction(transaction)
             print(transaction)
-            # print(clothing_accessories.show_budget_record())
         elif budget_type_of_transaction == BudgetTypeEnum.EO.value:
-            eo = self._budget.get("EO")  # GE budget
+            eo = self._budget.get("EO")
             eo.add_transaction(transaction)
             print(transaction)
-            # print(eo.show_budget_record())
         elif budget_type_of_transaction == BudgetTypeEnum.MIS.value:
-            mis = self._budget.get("MIS")  # GE budget
+            mis = self._budget.get("MIS")
             mis.add_transaction(transaction)
             print(transaction)
-            # print(mis.show_budget_record())
         else:
             print("Please check your budget type")
 
@@ -394,7 +391,7 @@ class User:
                                 user_type="Trouble Maker",
                                 account_number="1357911",
                                 balance=5000,
-                                budget=[[500, 250], [600, 300], [700, 350], [800, 400]],
+                                budget=[[500, 375], [600, 450], [700, 525], [800, 600]],
                                 bank_name="CIBC",
                                 is_locked_out=False))
 

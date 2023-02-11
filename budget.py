@@ -1,5 +1,5 @@
 """
-TODO Taylor: Write a description here
+This file will handle everything about budget
 
 # Name1: Nash Baek (nash4comp@gmail.com)
 # Student number1: A01243888
@@ -72,10 +72,8 @@ class Budget:
             self.angel_setup()
         elif user_type == "Trouble Maker":
             self.tm_setup()
-            print(self.get_lockout_budget_limit())
         else:
             self.rebel_setup()
-            print(self.get_lockout_budget_limit())
 
     def get_total_budget(self):
         """
