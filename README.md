@@ -11,7 +11,7 @@ It allows parents to set a budget for their children and monitor their spending.
 
 UML diagram: https://app.diagrams.net/#G1DUxHF4SH4QveN8GbqGaHewuu07bC5lDG
 
-![UML][https://github.com/nash4comp/TheFam/blob/master/uml.png]
+![UML](https://github.com/nash4comp/TheFam/blob/master/uml.png)
 
 ## How F.A.M Works
 
