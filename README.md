@@ -11,6 +11,8 @@ It allows parents to set a budget for their children and monitor their spending.
 
 UML diagram: https://app.diagrams.net/#G1DUxHF4SH4QveN8GbqGaHewuu07bC5lDG
 
+![UML][https://github.com/nash4comp/TheFam/blob/master/uml.png]
+
 ## How F.A.M Works
 
 This program will register a user, keep track of all the spending/transactions on users' bank account and lock the account if certain conditions are met.
